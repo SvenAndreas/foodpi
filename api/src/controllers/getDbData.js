@@ -16,4 +16,15 @@ const dbRecipes = async ()=>{
     }
 }
 
-module.exports = dbRecipes
+const getDiets = async()=>{
+    try{
+        const diets = await Diet.findAll()
+        console.log(diets)
+        return diets
+    }catch(e){
+        return e
+    }
+}
+
+
+module.exports = {dbRecipes,getDiets}
