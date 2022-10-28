@@ -28,6 +28,12 @@ module.exports = (sequelize) => {
     diets:{
       type: DataTypes.STRING
     },
+    dishTypes:{
+      type: DataTypes.STRING
+    },
+    readyInMinutes:{
+      type: DataTypes.INTEGER
+    },
     isFromLocalDB:{
       type: DataTypes.BOOLEAN,
       defaultValue: true,

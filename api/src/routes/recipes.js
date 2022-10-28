@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const mergeData = require("../controllers/mergeData.js")
 const {apiRecipesById} = require("../controllers/getApiData")
+const {Recipe} = require("../db.js")
 const router = Router();
 
 
@@ -32,6 +33,27 @@ router.get("/recipes/:id", async(req,res)=>{
         res.json(details)
     }catch(e){
         res.status(404).send(e.message)
+    }
+})
+
+
+router.post("/recipes", async(req,res)=>{
+    const {name,summary,healthScore,analyzedInstructions,readyInMinutes,dishTypes,diets} = req.body
+    try{
+        
+        if(!name || !summary || !healthScore || !analyzedInstructions || !readyInMinutes || !dishTypes || !diets) throw new Error("Missing data")
+        const newRecipe = await Recipe.create({
+            name,
+            summary,
+            healthScore,
+            analyzedInstructions,
+            readyInMinutes,
+            dishTypes,
+            diets
+        })
+        res.json(newRecipe)
+    }catch(e){
+        res.status(400).send(e.message)
     }
 })
 
