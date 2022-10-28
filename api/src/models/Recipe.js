@@ -25,6 +25,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(1000),
       allowNull: false
     },
+    diets:{
+      type: DataTypes.STRING
+    },
     isFromLocalDB:{
       type: DataTypes.BOOLEAN,
       defaultValue: true,
