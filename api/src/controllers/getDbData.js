@@ -4,7 +4,13 @@ const {Diet} = require("../db.js")
 const dbRecipes = async ()=>{
     try{
         const recipes = await Recipe.findAll({
-            includes: Diet
+            include:{
+                model:Diet,
+                attributes:["name"],
+                through:{
+                    attributes:[]
+                }
+            }
         }
         )
         // if(recipes.length === 0) throw new Error("There are not recipes in DB")

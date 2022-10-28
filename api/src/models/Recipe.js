@@ -25,9 +25,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(1000),
       allowNull: false
     },
-    diets:{
-      type: DataTypes.STRING
-    },
     dishTypes:{
       type: DataTypes.STRING
     },

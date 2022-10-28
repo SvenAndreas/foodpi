@@ -1,5 +1,6 @@
 require("dotenv").config();
 const axios = require("axios");
+const { UUIDV4, UUID } = require("sequelize");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const { API_KEY } = process.env;
@@ -39,6 +40,7 @@ const apiRecipes = async () => {
 };
 
 const apiRecipesById = async (id) => {
+  
   try {
     const recipes = await axios.get(
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
@@ -68,11 +70,9 @@ const apiRecipesById = async (id) => {
           ? await recipes.data.diets.map((e) => e)
           : "There are no diets to show",
       };
-    } else {
-      throw new Error("The API is not working");
-    }
+    } 
   } catch (e) {
-    return e;
+    return "There are no recipes with that id in the API";
   }
 };
 
