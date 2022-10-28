@@ -1,10 +1,10 @@
-const getApiData = require("./getApiData")
+const {apiRecipes} = require("./getApiData")
 const getDbData = require("./getDbData")
 
 
 const mergeData = async ()=>{
     try{
-        let apiGet = await getApiData()
+        let apiGet = await apiRecipes()
         let dbGet = await getDbData()
         let mergeData = apiGet.concat(dbGet)
         // console.log(mergeData)

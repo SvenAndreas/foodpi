@@ -2,15 +2,15 @@ require('dotenv').config();
 const axios = require('axios')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-// const API_KEY = "032bd816560e4955bd5d3bb65972b7fa"
 const {API_KEY} = process.env
 
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+
 const apiRecipes = async ()=>{
     try{
-        const recipes = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=50`)
+        const recipes = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
         if(recipes.data.results.length > 0){ 
             const data = await recipes.data.results.map(e=>{
                 return {
@@ -27,7 +27,7 @@ const apiRecipes = async ()=>{
             return data
         } 
         else {
-         throw new Error("There is no data")   
+         throw new Error("The API is not working")   
         }
     }catch(e){
         console.log(e.message)
@@ -35,4 +35,30 @@ const apiRecipes = async ()=>{
     }
 }
 
-module.exports = apiRecipes;
+const apiRecipesById = async (id) => {
+    try{
+        const recipes = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
+        // console.log(recipes.data.title)
+        if(Object.keys(recipes.data).length > 0){
+            return{
+                name : recipes.data.title,
+                image: recipes.data.image,
+                summary: recipes.data.summary,
+                healthScore: recipes.data.healthScore,
+                analyzedInstructions: (recipes.data.analyzedInstructions[0] && recipes.data.analyzedInstructions[0].steps 
+                    ? recipes.data.analyzedInstructions[0].steps.map((steps,index )=> index+1+" step: " + steps.step)
+                    : "There are no instructions to show"),
+                diets : (recipes.data.diets
+                    ? await recipes.data.diets.map(e=>e)
+                    : "There are no diets to show")
+            }
+        }else{
+            throw new Error("The API is not working")
+        }
+
+    }catch(e){
+        return e
+    }
+}
+
+module.exports = {apiRecipes, apiRecipesById}
