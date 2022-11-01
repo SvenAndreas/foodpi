@@ -1,0 +1,136 @@
+.container {
+    display: flex;
+    height:100vh;
+    align-items: center;
+    color: #fff
+}
+
+.content  {
+  max-width: 49rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+
+.videoContainer{
+    position: absolute;
+    overflow:hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.videoContainer video {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.overlayContainer{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #303952;
+    opacity: 0.50;
+}
+
+.contentContainer{
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contentContainer h1 {
+    font-family: roboto;
+    font-size: 50px;
+    margin-bottom: 0;
+    mix-blend-mode: multiply;
+}
+
+.contentContainer p {
+    font-size: 1.5rem;
+    display: block;
+    padding-bottom: 2rem;
+}
+
+.contentContainer audio{
+    margin-top: 2rem;
+}
+
+
+.btn {
+    cursor: pointer;
+    background: #c44569;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border: none;
+    border-radius: 4%;
+    transition: 0.2s all;
+}
+.btn:active{
+    scale: 0.90
+}
+
+
+@media  (max-width: 960px){
+    .content{
+        padding: 0 3rem 0 3rem
+    }
+    .videoContainer{
+        padding-top: 2rem;
+        width: 100%;
+        height: 100vh;
+    }
+    .contentContainer {
+        font-size: 50px;
+        margin-top: 25rem;
+    }
+    .btn{
+        width: 100%;
+    }
+}
+
+@media  (max-width: 629px){
+    .content{
+        padding: 0 3rem 0 3rem
+    }
+    .videoContainer{
+        padding-top: 2rem;
+        width: 100%;
+        height: 100vh;
+    }
+    .contentContainer {
+        font-size: 50px;
+        margin-top: 30rem;
+    }
+    .btn{
+        width: 100%;
+    }
+}
+
+@media  (max-width: 541px){
+    .content{
+        padding: 10px
+    }
+    .videoContainer{
+        padding-top: 2rem;
+        position:fixed;
+        width: 100%;
+        height: 100vh;
+        
+    }
+    .contentContainer {
+        margin-bottom: 14rem;
+        font-size: 3rem;
+    }
+    .btn{
+        width: 100%;
+    }
+}
