@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 18rem;
+    background-color: rgb(240, 236, 236);
+    padding: 0.5rem;
+    border-radius: 5%;
+    margin:2rem
+}
+
+.container img{
+    border-radius: 5%;
+    width: 100%;
+}
+
+.container p {
+    font-size:14px;
+    font-weight: 400;
+}
+

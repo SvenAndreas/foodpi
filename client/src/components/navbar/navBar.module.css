@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&family=Playfair+Display+SC&display=swap');
+.navContainer{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-bottom: 3rem solid rgb(233, 233, 233);
+    width: 100%;
+    height: 10rem;
+}
+
+.navContainer p{
+    color:#fff;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-right: 0.5rem;
+    border:none;
+    background-color: #be0b3e;
+    width: 15rem;
+    color: #fff;
+    height: 2rem;
+    border-radius: 10%;
+    text-align: center;
+    user-select: none;
+    margin: 1rem;
+    font-family: 'Playfair Display SC';
+}
+.navContainer button{
+    border:none;
+    background-color: #be0b3e;
+    width: 8rem;
+    color: #fff;
+    height: 2rem;
+    border-radius: 10%;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.2s all;
+    cursor: pointer;
+    margin: 0.4rem;
+}
+
+.navContainer button:active{
+    scale: 0.90
+}
+
+.navContainer_searchBar{
+    display: flex;
+    width: 100%;
+
+}
+.navContainer_searchBar_img{
+    justify-self: flex-start;
+    margin-left: 1rem;
+}
+.navContainer_searchBar_img img{
+    justify-self: flex-start;
+    margin-left: 1rem;
+    animation: translate 0.5s linear infinite ,shrink 1s linear infinite;
+}
+@keyframes shrink {
+    50%{transform: scale(0.98);}
+}
+@keyframes translate{
+    0% {transform : rotate(5deg)}
+    50% {transform: rotate(-5deg)}
+    100%{transform: rotate(5deg);}
+    /* 100% {transform: rotate(30deg);} */
+}
+
+.navContainer_searchBar_searchInput{
+    align-self: center;
+    margin: auto;
+}
+.navContainer_searchBar_searchInput input{
+    align-self: center;
+    margin: 0;
+    width: 30rem;
+    height: 3rem;
+    border-radius: 10%;
+    outline: none;
+    margin: 1rem 1rem 1rem 0;
+    padding: 1rem;
+}
+.navContainer_searchBar_searchInput input:focus::placeholder{
+    color:transparent
+}
+::placeholder{
+    font-weight: 600;
+    align-self: center;
+}
+
+.navContainer_searchBar_searchInput button img{
+    width: 1rem;
+    align-self: center;
+    margin: 0rem 0.5rem 0rem 0rem;
+}
+
+
+.navContainer_searchBar img{
+    width: 10rem;
+    margin-left: 0;
+}
+
+.optionsContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.navContainer button {
+    align-self: center;
+}
+
+.navContainer_link {
+    align-self: center;
+}
+
+.navContainer_options{
+    display: flex;
+    align-content: center;
+    height: 3rem;
+}
+
+.navContainer_options select{
+    height: 2rem;
+    align-self: center;
+}
+.navContainer_options p{
+    align-self: center;
+}

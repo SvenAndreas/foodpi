@@ -1,0 +1,22 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.paginateContainer{
+    align-self: center;
+}
+.cardContainer_recipeCard{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 80%;
+}
