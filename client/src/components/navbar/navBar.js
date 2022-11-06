@@ -1,24 +1,41 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import s from "./navBar.module.css"
 import {Link} from "react-router-dom"
-import { getDiets, getRecipes } from '../../redux/actions'
-import { useDispatch,useSelector } from 'react-redux'
+import { filterByDiet, getDiets, getRecipes, orderAlpha } from '../../redux/actions'
+// import { useDispatch,useSelector } from 'react-redux'
 import logo from "../../media/images/logo.png"
 import magnifyingglass from "../../media/images/lupa.png"
+import { connect } from 'react-redux'
 
-function NavBar() {
-    const dispatch = useDispatch()
-    const allDiets = useSelector(state=> state.diets)
+export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage}) {
+    // const dispatch = useDispatch()
+    // const allDiets = useSelector(state=> state.diets)
+
   
+    const allDiets = diets
     useEffect( ()=>{
-      dispatch(getDiets())
+    //   dispatch(getDiets())
+      getDiets()
     },[])
   
   
     const resetRecipes = (e)=>{
       e.preventDefault()
-      dispatch(getRecipes())
+    //   dispatch(getRecipes())
+      getRecipes()
     }
+
+    const handleFilteredDiets = (e)=>{
+        filterByDiet(e.target.value)
+    }
+
+    const handleOrderAlpha = (e)=>{
+        e.preventDefault()
+        orderAlpha(e.target.value)
+        setCurrentPage(1)
+        setOrder(`${e.target.value}`)
+    }
+
   return (
     <div className={s.navContainer}>
 
@@ -44,9 +61,10 @@ function NavBar() {
            
             <div className={s.navContainer_options}>
                 <p>Order alphabetically:</p>
-                <select>
-                    <option>A-Z</option>
-                    <option>Z-A</option>
+                <select onChange={(e)=>handleOrderAlpha(e)}>
+                    <option value="Default">Default</option>
+                    <option value="A-Z">A-Z</option>
+                    <option value="Z-A">Z-A</option>
                 </select>
              </div>
 
@@ -60,9 +78,10 @@ function NavBar() {
 
             <div className={s.navContainer_options}>
                 <p>Order by diet:</p>
-                <select>
+                <select onChange={(e)=>handleFilteredDiets(e)}>
+                    <option value="All">All</option>
                 {allDiets && allDiets.map(e=>(
-                    <option value={e.name.toLowerCase()} key={e.id}>{e.name}</option>
+                    <option value={e.name} key={e.id} >{e.name}</option>
                 ))}
                 </select>
             </div>
@@ -72,4 +91,19 @@ function NavBar() {
   )
 }
 
-export default NavBar
+function mapStateToProps(state){
+    return {
+        diets: state.diets
+    }
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        getDiets: function () {dispatch(getDiets())},
+        getRecipes: recipes => dispatch(getRecipes()),
+        filterByDiet: diet => dispatch(filterByDiet(diet)),
+        orderAlpha: alpha => dispatch(orderAlpha(alpha))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(NavBar)

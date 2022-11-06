@@ -12,6 +12,7 @@ function Home() {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [recipesPerPage,setRecipesPerPage] = useState(9)
+    const [order , setOrder] = useState("")
 
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
@@ -38,7 +39,7 @@ function Home() {
   
   return (
     <div className={s.container}>
-        <NavBar />
+        <NavBar setCurrentPage={setCurrentPage} setOrder={setOrder} />
         <div className={s.paginateContainer}>
           <Paginate recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginate={paginate} goFoward={goFoward} goBackWards={goBackWards}/>
         </div>

@@ -4,8 +4,8 @@ import s from "./paginate.module.css"
 function Paginate({recipesPerPage, allRecipes, paginate,goFoward,goBackWards}) {
     const pageNumbers= []
 
-    for(let i = 0 ; i <= Math.floor(allRecipes/recipesPerPage); i++){
-        pageNumbers.push(i+1)
+    for(let i = 1 ; i <= Math.ceil(allRecipes/recipesPerPage); i++){
+        pageNumbers.push(i)
     }
 
   return (
