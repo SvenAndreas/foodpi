@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false, 
     },
     summary:{
       type: DataTypes.STRING,
@@ -35,7 +35,8 @@ module.exports = (sequelize) => {
       allowNull:false
     },
     image:{
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull:false
     },
     isFromLocalDB:{
       type: DataTypes.BOOLEAN,

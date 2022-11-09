@@ -36,7 +36,7 @@ router.get("/recipes/:id", async(req,res)=>{
         if(details === "There are not recipes with that id in the API"){
             const getRecipes = await dbRecipeById(id)
             console.log(getRecipes)
-            getRecipes.length > 0 
+            getRecipes
             ? res.json(getRecipes)
             : res.status(400).send("There are no recipes with that id in DB")
         }else res.json(details)

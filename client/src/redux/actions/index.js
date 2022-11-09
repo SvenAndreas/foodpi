@@ -63,16 +63,14 @@ export const orderHealthScore = (payload) => {
 
 export const getRecipeById = (payload)=>{
     console.log(payload)
-    return function (dispatch){
-        fetch(`http://localhost:3001/recipes/${payload}`)
-        .then(data => data.json())
-        .then(json => {
-            return dispatch({
+    return async function (dispatch){
+       const recipe = await fetch(`http://localhost:3001/recipes/${payload}`)
+       const data = await recipe.json()
+       console.log("esto es json",data)
+       return dispatch({
                 type: GET_RECIPES_BY_ID,
-                payload: json
+                payload: data
             })
-        })
-        .catch(e=> e.message)
     }
 }
 

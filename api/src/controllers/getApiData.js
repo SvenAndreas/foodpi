@@ -53,9 +53,9 @@ const apiRecipesById = async (id) => {
         image: recipes.data.image,
         summary: recipes.data.summary,
         healthScore: recipes.data.healthScore,
-        cuisines: recipes.data.cuisines[0]
-          ? recipes.data.cuisines.map((e) => e)
-          : "There are no cuisines to show",
+        // cuisines: recipes.data.cuisines[0]
+        //   ? recipes.data.cuisines.map((e) => e)
+        //   : "There are no cuisines to show",
         readyInMinutes: recipes.data.readyInMinutes,
         dishTypes: recipes.data.dishTypes[0]
           ? recipes.data.dishTypes.map((e) => e)

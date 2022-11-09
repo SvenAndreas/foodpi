@@ -23,7 +23,7 @@ function Paginate({
           <button onClick={() => goBackWards()}> {"<"}</button>
           {pageNumbers &&
             pageNumbers.map((e) => (
-              <button onClick={() => paginate(e)}>{e}</button>
+              <button key={e} onClick={() => paginate(e)}>{e}</button>
             ))}
           <button onClick={() => goFoward()}>{">"}</button>
         </div>
