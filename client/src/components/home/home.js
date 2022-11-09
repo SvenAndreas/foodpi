@@ -1,11 +1,11 @@
 import {React,useEffect, useState} from 'react'
 import {useSelector, useDispatch} from "react-redux"
 import { getRecipes } from '../../redux/actions'
-import RecipeCard from '../recipeCard/recipeCard'
+import RecipeCard from '../recipeCard/RecipeCard'
 import { Link } from 'react-router-dom'
 import s from "./home.module.css"
-import NavBar from '../navbar/navBar'
-import Paginate from '../paginate/paginate'
+import NavBar from '../navbar/NavBar'
+import Paginate from '../paginate/Paginate'
 
 function Home() {
     const dispatch = useDispatch()

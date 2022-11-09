@@ -33,6 +33,7 @@ export const getDiets = ()=>{
 
 
 export const filterByDiet = (payload)=>{
+    console.log(payload)
     return async function(dispatch){
         return dispatch({
             type: FILTER_BY_DIET,

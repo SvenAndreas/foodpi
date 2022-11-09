@@ -2,6 +2,7 @@ import React from 'react'
 import s from "./recipeCard.module.css"
 
 function RecipeCard({id,healthScore,name,image,diets}) {
+  console.log(diets)
   return (
     <div className={s.container}>
       
