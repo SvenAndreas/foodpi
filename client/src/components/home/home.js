@@ -2,6 +2,7 @@ import {React,useEffect, useState} from 'react'
 import {useSelector, useDispatch} from "react-redux"
 import { getRecipes } from '../../redux/actions'
 import RecipeCard from '../recipeCard/recipeCard'
+import { Link } from 'react-router-dom'
 import s from "./home.module.css"
 import NavBar from '../navbar/navBar'
 import Paginate from '../paginate/paginate'
@@ -17,7 +18,7 @@ function Home() {
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe,indexOfLastRecipe)
-
+    console.log(typeof currentRecipes)
     const paginate = (pageNumber)=>{
       setCurrentPage(pageNumber)
     }
@@ -40,18 +41,29 @@ function Home() {
   return (
     <div className={s.container}>
         <NavBar setCurrentPage={setCurrentPage} setOrder={setOrder} />
-        <div className={s.paginateContainer}>
-          <Paginate recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginate={paginate} goFoward={goFoward} goBackWards={goBackWards}/>
+
+        <div className={
+          typeof currentRecipes === "string" 
+          ? s.paginateContainer_notFound 
+          : s.paginateContainer}>
+
+          {typeof currentRecipes === "string" ? null :
+            <Paginate recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginate={paginate} goFoward={goFoward} goBackWards={goBackWards}/>
+          }  
+
         </div>
 
         
         <div className={s.cardContainer}>
           <div className={s.cardContainer_recipeCard}>
-            {!currentRecipes 
+            {
+            !currentRecipes 
             ? <h1>Loading..</h1>
-            : currentRecipes.map(e=>{
-                return <RecipeCard key={e.id} id={e.id} diets={e.diets || e.Diets.map(e=>e.name)}  name={e.name} healthScore={e.healthScore} image={e.image}/>
-            })}
+            : typeof currentRecipes === "string" ? <p className={s.notFound}>Recipe not found</p> : currentRecipes.map(e=>{
+                return <Link key={e.id} to={`/details/${e.id}`}> <RecipeCard key={e.id} id={e.id} diets={e.diets || e.Diets.map(e=>e.name)}  name={e.name} healthScore={e.healthScore} image={e.image}/></Link>
+               })
+            
+            }
           </div>
         </div>
 

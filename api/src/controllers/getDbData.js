@@ -10,12 +10,32 @@ const dbRecipes = async ()=>{
                 through:{
                     attributes:[]
                 }
-            }
+            },
         }
         )
-        // if(recipes.length === 0) throw new Error("There are not recipes in DB")
-        // console.log(recipes)
+      
         return recipes
+    }catch(e){
+        // console.log(e.message)
+        return e.message
+    }
+}
+
+const dbRecipeById = async (id)=>{
+    try{
+        const recipe = await Recipe.findAll({
+            where:{id},
+            include:{
+                model:Diet,
+                attributes:["name"],
+                through:{
+                    attributes:[]
+                }
+            },
+        }
+        )
+      
+        return recipe
     }catch(e){
         // console.log(e.message)
         return e.message
@@ -25,7 +45,7 @@ const dbRecipes = async ()=>{
 const getDiets = async()=>{
     try{
         const diets = await Diet.findAll()
-        console.log(diets)
+        // console.log(diets)
         return diets
     }catch(e){
         return e
@@ -33,4 +53,4 @@ const getDiets = async()=>{
 }
 
 
-module.exports = {dbRecipes,getDiets}
+module.exports = {dbRecipes,getDiets,dbRecipeById}

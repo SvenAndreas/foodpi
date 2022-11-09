@@ -5,6 +5,13 @@
     justify-content: space-evenly;
 }
 
+.navContainer div {
+    display: flex;
+    width: 70%;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+}
+
 .navContainer button{
    
         border:none;

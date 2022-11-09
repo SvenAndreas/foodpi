@@ -9,7 +9,6 @@ function RecipeCard({id,healthScore,name,image,diets}) {
         <h4>{name}</h4>
         <p>Health Score: {healthScore}</p>
         <p>Diets: {diets}</p>
-        
     </div>
   )
 }

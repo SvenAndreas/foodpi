@@ -3,7 +3,7 @@ const router = Router();
 const {Diet} = require("../db.js")
 
 router.use(async (req,res,next)=>{
-    const diets =["Gluten free","Ketogenic","Vegetarian","Lacto-Vegetarian","Ovo-Vegetarian","Vegan","Pescetarian","Paleo","Primal","Low FODMAP","Whole30"]
+    const diets =["Gluten free","Ketogenic","Lacto ovo Vegetarian","Dairy free","Vegan","Pescatarian","Paleolithic","Primal","Fodmap friendly","Whole 30"]
     const dbDiets = diets.map(e=> Diet.findOrCreate({ 
         where:{
             name:e

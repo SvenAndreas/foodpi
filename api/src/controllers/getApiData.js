@@ -1,6 +1,6 @@
 require("dotenv").config();
 const axios = require("axios");
-const { UUIDV4, UUID } = require("sequelize");
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const { API_KEY } = process.env;
@@ -18,8 +18,10 @@ const apiRecipes = async () => {
         return {
           id: e.id,
           name: e.title,
+          image: e.image,
           summary: e.summary,
           healthScore: e.healthScore,
+          diets:e.diets,
           analyzedInstructions:
             e.analyzedInstructions[0] && e.analyzedInstructions[0].steps
               ? e.analyzedInstructions[0].steps.map(
@@ -30,9 +32,7 @@ const apiRecipes = async () => {
       });
       // console.log(data)
       return data;
-    } else {
-      throw new Error("The API is not working");
-    }
+    } 
   } catch (e) {
     console.log(e.message);
     return e;
@@ -40,7 +40,7 @@ const apiRecipes = async () => {
 };
 
 const apiRecipesById = async (id) => {
-  
+  // console.log(id)
   try {
     const recipes = await axios.get(
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
@@ -48,6 +48,7 @@ const apiRecipesById = async (id) => {
     // console.log(recipes.data.title)
     if (Object.keys(recipes.data).length > 0) {
       return {
+        id:recipes.data.id,
         name: recipes.data.title,
         image: recipes.data.image,
         summary: recipes.data.summary,
@@ -70,9 +71,12 @@ const apiRecipesById = async (id) => {
           ? await recipes.data.diets.map((e) => e)
           : "There are no diets to show",
       };
-    } 
+    } else {
+      return "API problem: No data in the API with this ID."
+    }
   } catch (e) {
-    return "There are no recipes with that id in the API";
+
+    return "There are not recipes with that id in the API";
   }
 };
 

@@ -1,22 +1,35 @@
-import React from 'react'
-import s from "./paginate.module.css"
+import React from "react";
+import s from "./paginate.module.css";
 
-function Paginate({recipesPerPage, allRecipes, paginate,goFoward,goBackWards}) {
-    const pageNumbers= []
+function Paginate({
+  recipesPerPage,
+  allRecipes,
+  paginate,
+  goFoward,
+  goBackWards,
+}) {
+  const pageNumbers = [];
 
-    for(let i = 1 ; i <= Math.ceil(allRecipes/recipesPerPage); i++){
-        pageNumbers.push(i)
-    }
+  for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <nav className={s.navContainer}>
-        <button onClick={()=>goBackWards()}> {"<"}</button>
-        {pageNumbers && pageNumbers.map(e=>(
-                <button onClick={()=>paginate(e)}>{e}</button>
-                ))}
-        <button onClick={()=>goFoward()}>{">"}</button>
+      {!allRecipes ? (
+        <h1>loading</h1>
+      ) : (
+        <div>
+          <button onClick={() => goBackWards()}> {"<"}</button>
+          {pageNumbers &&
+            pageNumbers.map((e) => (
+              <button onClick={() => paginate(e)}>{e}</button>
+            ))}
+          <button onClick={() => goFoward()}>{">"}</button>
+        </div>
+      )}
     </nav>
-  )
+  );
 }
 
-export default Paginate
+export default Paginate;

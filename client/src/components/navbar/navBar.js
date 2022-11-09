@@ -1,16 +1,16 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect,useState} from 'react'
 import s from "./navBar.module.css"
 import {Link} from "react-router-dom"
-import { filterByDiet, getDiets, getRecipes, orderAlpha } from '../../redux/actions'
+import { filterByDiet, getDiets, getRecipes, orderAlpha, orderHealthScore, searchByName } from '../../redux/actions'
 // import { useDispatch,useSelector } from 'react-redux'
 import logo from "../../media/images/logo.png"
 import magnifyingglass from "../../media/images/lupa.png"
 import { connect } from 'react-redux'
 
-export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage}) {
+export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage,orderHealthScore,searchByName}) {
     // const dispatch = useDispatch()
     // const allDiets = useSelector(state=> state.diets)
-
+    const [name,setName] = useState("")
   
     const allDiets = diets
     useEffect( ()=>{
@@ -23,6 +23,7 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
       e.preventDefault()
     //   dispatch(getRecipes())
       getRecipes()
+      setCurrentPage(1)
     }
 
     const handleFilteredDiets = (e)=>{
@@ -36,6 +37,23 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
         setOrder(`${e.target.value}`)
     }
 
+    const handleOrderScore = (e)=>{
+        e.preventDefault()
+        orderHealthScore(e.target.value)
+        setCurrentPage(1)
+        setOrder(`${e.target.value}`)
+    }
+
+    const handleInputChange = (e)=>{
+        e.preventDefault()
+        setName(e.target.value)
+    }
+
+    const handleSubmit = (e)=>{
+        e.preventDefault()
+        searchByName(name)
+    }
+
   return (
     <div className={s.navContainer}>
 
@@ -45,8 +63,8 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
             </div>
 
             <div className={s.navContainer_searchBar_searchInput}>
-                <input placeholder='Search...'></input>
-                <button>
+                <input onChange={(e)=>handleInputChange(e)} placeholder='Search...'></input>
+                <button type='submit' onClick={(e)=>handleSubmit(e)}>
                     <img src={magnifyingglass} alt="magnifying glass"/>
                     Search
                 </button>
@@ -70,9 +88,9 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
 
              <div className={s.navContainer_options}>
                 <p>Order by health score:</p>
-                <select>
-                    <option>Highest score</option>
-                    <option>Lowest score</option>
+                <select onChange={(e)=>handleOrderScore(e)}>
+                    <option value="high">Highest score</option>
+                    <option value="low">Lowest score</option>
                 </select>
              </div>
 
@@ -102,7 +120,9 @@ function mapDispatchToProps(dispatch){
         getDiets: function () {dispatch(getDiets())},
         getRecipes: recipes => dispatch(getRecipes()),
         filterByDiet: diet => dispatch(filterByDiet(diet)),
-        orderAlpha: alpha => dispatch(orderAlpha(alpha))
+        orderAlpha: alpha => dispatch(orderAlpha(alpha)),
+        orderHealthScore: score => dispatch(orderHealthScore(score)),
+        searchByName: name => dispatch(searchByName(name))
     }
 }
 

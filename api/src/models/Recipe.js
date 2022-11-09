@@ -19,17 +19,23 @@ module.exports = (sequelize) => {
       allowNull:false
     },
     healthScore:{
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull:false
     },
     analyzedInstructions:{
       type: DataTypes.STRING(1000),
       allowNull: false
     },
     dishTypes:{
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull:false
     },
     readyInMinutes:{
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull:false
+    },
+    image:{
+      type: DataTypes.STRING
     },
     isFromLocalDB:{
       type: DataTypes.BOOLEAN,
