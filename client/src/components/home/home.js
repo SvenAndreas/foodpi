@@ -9,7 +9,8 @@ import Paginate from '../paginate/Paginate'
 
 function Home() {
     const dispatch = useDispatch()
-    const allRecipes = useSelector(state=> state.recipes)
+    const recipes = useSelector(state=> state.recipes)
+    const allRecipes = useSelector(state=> state.allRecipes)
 
     const [currentPage, setCurrentPage] = useState(1)
     const [recipesPerPage,setRecipesPerPage] = useState(9)
@@ -17,14 +18,14 @@ function Home() {
 
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-    const currentRecipes = allRecipes.slice(indexOfFirstRecipe,indexOfLastRecipe)
+    const currentRecipes = recipes.slice(indexOfFirstRecipe,indexOfLastRecipe)
     console.log(typeof currentRecipes)
     const paginate = (pageNumber)=>{
       setCurrentPage(pageNumber)
     }
 
     const goFoward = ()=>{
-      if(currentPage < Math.floor(allRecipes.length/recipesPerPage))
+      if(currentPage < Math.floor(recipes.length/recipesPerPage))
       setCurrentPage(currentPage => currentPage+1)
     }
 
@@ -40,7 +41,7 @@ function Home() {
   
   return (
     <div className={s.container}>
-        <NavBar setCurrentPage={setCurrentPage} setOrder={setOrder} />
+        <NavBar setCurrentPage={setCurrentPage} setOrder={setOrder} recipes={recipes} allRecipes={allRecipes} />
 
         <div className={
           typeof currentRecipes === "string" 
@@ -48,7 +49,7 @@ function Home() {
           : s.paginateContainer}>
 
           {typeof currentRecipes === "string" ? null :
-            <Paginate recipesPerPage={recipesPerPage} allRecipes={allRecipes.length} paginate={paginate} goFoward={goFoward} goBackWards={goBackWards}/>
+            <Paginate recipesPerPage={recipesPerPage} allRecipes={recipes.length} paginate={paginate} goFoward={goFoward} goBackWards={goBackWards}/>
           }  
 
         </div>
@@ -60,12 +61,14 @@ function Home() {
             !currentRecipes 
             ? <h1>Loading..</h1>
             : typeof currentRecipes === "string" ? <p className={s.notFound}>Recipe not found</p> : currentRecipes.map(e=>{
-                return <Link key={e.id} to={`/details/${e.id}`}> <RecipeCard key={e.id} id={e.id} diets={e.diets || e.Diets.map(e=>e.name)}  name={e.name} healthScore={e.healthScore} image={e.image}/></Link>
-               })
+                return (
+                    <RecipeCard key={e.id} id={e.id} diets={e.diets || e.Diets.map(e=>e.name)}  name={e.name} healthScore={e.healthScore} image={e.image}/>
+            )})
             
             }
           </div>
         </div>
+
 
     </div>
   )

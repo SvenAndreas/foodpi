@@ -4,10 +4,11 @@ import {Link} from "react-router-dom"
 import { filterByDiet, getDiets, getRecipes, orderAlpha, orderHealthScore, searchByName } from '../../redux/actions'
 // import { useDispatch,useSelector } from 'react-redux'
 import logo from "../../media/images/logo.png"
-import magnifyingglass from "../../media/images/lupa.png"
+// import magnifyingglass from "../../media/images/lupa.png"
 import { connect } from 'react-redux'
+import SearchBar from '../searchBar/SearchBar'
 
-export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage,orderHealthScore,searchByName}) {
+export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage,orderHealthScore,searchByName,allRecipes,recipes}) {
     // const dispatch = useDispatch()
     // const allDiets = useSelector(state=> state.diets)
     const [name,setName] = useState("")
@@ -62,13 +63,14 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
                 <img src={logo} alt="logo" />
             </div>
 
-            <div className={s.navContainer_searchBar_searchInput}>
+            {/* <div className={s.navContainer_searchBar_searchInput}>
                 <input onChange={(e)=>handleInputChange(e)} placeholder='Search...'></input>
                 <button type='submit' onClick={(e)=>handleSubmit(e)}>
                     <img src={magnifyingglass} alt="magnifying glass"/>
                     Search
                 </button>
-            </div>
+            </div> */}
+            <SearchBar allRecipes={allRecipes}/>
        </div>
 
         <div className={s.optionsContainer} >
@@ -78,7 +80,7 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
             <button onClick={e=> resetRecipes(e)}>Reset recipes</button>
            
             <div className={s.navContainer_options}>
-                <p>Order alphabetically:</p>
+                <p className={s.navContainer_p}>Order alphabetically:</p>
                 <select onChange={(e)=>handleOrderAlpha(e)}>
                     <option value="Default">Default</option>
                     <option value="A-Z">A-Z</option>
@@ -87,7 +89,7 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
              </div>
 
              <div className={s.navContainer_options}>
-                <p>Order by health score:</p>
+                <p className={s.navContainer_p}>Order by health score:</p>
                 <select onChange={(e)=>handleOrderScore(e)}>
                     <option value="high">Highest score</option>
                     <option value="low">Lowest score</option>
@@ -95,7 +97,7 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
              </div>
 
             <div className={s.navContainer_options}>
-                <p>Order by diet:</p>
+                <p className={s.navContainer_p}>Order by diet:</p>
                 <select onChange={(e)=>handleFilteredDiets(e)}>
                     <option value="All">All</option>
                 {allDiets && allDiets.map(e=>(

@@ -12,7 +12,7 @@ const initialState = {
 function rootReducer (state = initialState, action) {
     switch(action.type){
         case GET_RECIPES:
-            console.log(state.recipes)
+            // console.log(state.recipes)
             return{
                 ...state,
                 recipes: action.payload,
@@ -30,7 +30,6 @@ function rootReducer (state = initialState, action) {
             }
         case FILTER_BY_DIET:
             const allRecipes = state.allRecipes;
-            console.log("esto es all",allRecipes)
             const filtered = action.payload === "All" 
             ? allRecipes
             : allRecipes.filter(e=> 
@@ -44,10 +43,9 @@ function rootReducer (state = initialState, action) {
                 recipes: filtered
             }
         case FILTER_ALPHA:
-            // console.log(action.payload)
-            const recipes = state.allRecipes;
+            console.log(state.allRecipes)
             const alphaRecipes = action.payload === "Default" 
-            ? recipes
+            ? state.allRecipes
             :(
                 action.payload === "A-Z"
                 ? state.recipes.sort((a,b)=>{
@@ -60,12 +58,9 @@ function rootReducer (state = initialState, action) {
                     return 0
                 })
             ) 
-
-            // console.log(state.allRecipes)
-            // console.log(alphaRecipes)
             return{
                 ...state,
-                recipes:alphaRecipes
+                recipes:action.payload === "Default" ? state.allRecipes : alphaRecipes
             }
         case FILTER_BY_HEALTHSCORE:
             let orderHealthScore = action.payload === "high"
