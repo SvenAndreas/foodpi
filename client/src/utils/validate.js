@@ -10,9 +10,9 @@ export const validate = (input) => {
   if (!input.healthScore) {
     errors.healthScore = "*Health score is required";
   } else if (!/[0-9]/.test(input.healthScore)) {
-    errors.healthScore = "*Health score only accept numbers";
+    errors.healthScore = "*Only accept numbers";
   } else if (input.healthScore < 0 || input.healthScore > 100) {
-    errors.healthScore = "*Only numbers between 1 and 100";
+    errors.healthScore = "*Numbers (1 to 100)";
   }
 
   if (!input.analyzedInstructions) {
@@ -31,7 +31,7 @@ export const validate = (input) => {
   if (!input.readyInMinutes) {
     errors.readyInMinutes = "*Minutes are required";
   } else if (!/[0-9]/.test(input.readyInMinutes)) {
-    errors.readyInMinutes = "*Minutes only accepts numbers";
+    errors.readyInMinutes = "*Only accepts numbers";
   }
 
   if (!input.dishTypes) {
@@ -40,7 +40,9 @@ export const validate = (input) => {
 
   if (!input.image) {
     errors.image = "*URL is required";
-  }
+  }else if(
+    !/https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/.test(input.image)
+  )errors.image ="*Insert a valid URL: https:// or http:// or www."
 
   return errors
 };

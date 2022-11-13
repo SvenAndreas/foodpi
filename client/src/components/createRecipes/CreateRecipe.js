@@ -94,30 +94,37 @@ function CreateRecipe() {
   }
 
   return ( 
+    <div className={s.container}>
     <form className={s.form_container}>
-        <h3>Create Recipe</h3>
+
+        <div className={s.form_container_name}>
+         <h3>Create Recipe</h3>
+        </div>
 
         <div className={s.form_container_div}>
-          <label  className={s.label} htmlFor='name'>Recipe name:</label>
-          <input onChange={(e)=>handleInput(e)} name='name' value={input.name} placeholder="Enter name..." className={errors.name ? s.danger : s.ok}></input>
+          <label className={s.label} id="f" htmlFor='name'>Recipe name:</label>
+          <input onChange={(e)=>handleInput(e)} name='name'id='name' value={input.name} placeholder="Enter name..." className={!errors.name ? s.ok : s.form_container_div_input}></input>
+          {errors.name ? <p>{errors.name}</p> : null}
         </div>
-        {errors.name ? <p>{errors.name}</p> : null}
+        
         
         <div className={s.form_container_div}>
           <label className={s.label} htmlFor='healthScore'>Health Score:</label>
-          <input onChange={(e)=>handleInput(e)} name="healthScore" value={input.healthScore} placeholder="Enter health score..." className={errors.healthScore ? s.danger : s.ok}></input>
+          <input onChange={(e)=>handleInput(e)} name="healthScore" value={input.healthScore} placeholder="Enter health score..." className={s.form_container_div_input}></input>
+          {errors.healthScore ? <p>{errors.healthScore}</p> : null}
         </div>
-        {errors.healthScore ? <p>{errors.healthScore}</p> : null}
+        
         
 
         <div className={s.form_container_div}>
           <label className={s.label} htmlFor='readyInMinutes'>Ready in minutes:</label>
-          <input onChange={(e)=>handleInput(e)} name='readyInMinutes' value={input.readyInMinutes} placeholder="Enter minutes.."  className={errors.readyInMinutes ? s.danger : s.ok}/>
+          <input onChange={(e)=>handleInput(e)} name='readyInMinutes' value={input.readyInMinutes} placeholder="Enter minutes.."  className={s.form_container_div_input}/>
+          {errors.readyInMinutes ? <p>{errors.readyInMinutes}</p> : null}
         </div>
-        {errors.readyInMinutes ? <p>{errors.readyInMinutes}</p> : null}
+        
 
 
-        <label>Select diets:</label>
+        <label className={s.diets_label}>Select diets:</label>
         <div className={s.diets_container}>
           {/* <label>Select diet:</label>
           <select onChange={(e)=>handleInput(e)} name="diets" className={errors.diets ? s.danger : s.ok}>
@@ -130,7 +137,7 @@ function CreateRecipe() {
           {allDiets && allDiets.map(e=>{
             return( 
             <div className={s.checkBox_container}>
-              <label htmlFor={e.name}>{e.name}</label>
+              <label className={s.checkBox_label} htmlFor={e.name}>{e.name}</label>
               <input onChange={(e)=>handleSelect(e)} name="diets" type="checkbox" id={e.name} value={e.name} />
             </div>)
           })}
@@ -139,30 +146,33 @@ function CreateRecipe() {
 
         <div className={s.form_container_div}>
           <label className={s.label} htmlFor='dishTypes'>Dish type:</label>
-          <input onChange={(e)=>handleInput(e)} name='dishTypes' value={input.dishTypes} placeholder="Enter dish type..." className={errors.dishTypes ? s.danger : s.ok}/>
+          <input onChange={(e)=>handleInput(e)} name='dishTypes' value={input.dishTypes} placeholder="Enter dish type..." className={s.form_container_div_input}/>
+          {errors.dishTypes ? <p>{errors.dishTypes}</p> : null}
         </div>
-        {errors.dishTypes ? <p>{errors.dishTypes}</p> : null}
         
 
         <div className={s.form_container_div}>
-          <label className={s.label} htmlFor='summary'>Summary:</label>
-          <input onChange={(e)=>handleInput(e)} name='summary' value={input.summary} placeholder="Enter summary..." className={errors.summary ? s.danger : s.ok}/>
+          <label className={s.label_textarea}htmlFor='summary'>Summary:</label>
+          <textarea onChange={(e)=>handleInput(e)} name='summary' value={input.summary} placeholder="Enter summary..." className={errors.summary ? s.danger : s.ok}/>
+          {errors.summary ? <p>{errors.summary}</p> : null}
         </div>
-        {errors.summary ? <p>{errors.summary}</p> : null}
+      
 
 
         <div className={s.form_container_div}>
-          <label className={s.label} htmlFor='analyzedInstructions'>Instructions:</label>
-          <input onChange={(e)=>handleInput(e)} name='analyzedInstructions' value={input.analyzedInstructions} placeholder="Enter instructions..." className={errors.analyzedInstructions ? s.danger : s.ok}/>
+          <label className={s.label_textarea} htmlFor='analyzedInstructions'>Instructions:</label>
+          <textarea onChange={(e)=>handleInput(e)} name='analyzedInstructions' value={input.analyzedInstructions} placeholder="Enter instructions..." className={errors.analyzedInstructions ? s.danger : s.ok}/>
+          {errors.analyzedInstructions ? <p>{errors.analyzedInstructions}</p> : null}
         </div>
-        {errors.analyzedInstructions ? <p>{errors.analyzedInstructions}</p> : null}
+        
 
         <div className={s.form_container_div}>
           <label className={s.label} htmlFor='image'>Image URL:</label>
           <input onChange={(e)=>handleInput(e)} name="image" value={input.image}
-          placeholder="Insert image URL..." className={errors.image ? s.danger : s.ok}></input>
+          placeholder="Insert image URL..." className={s.form_container_div_input}></input>
+          {errors.image ? <p>{errors.image}</p> : null}
         </div>
-        {errors.image ? <p>{errors.image}</p> : null}
+        
         <div>
           <button onClick={handleSubmit}type='submit'>Create recipe</button>
           <Link to="/home"><button>Home</button></Link>
@@ -171,6 +181,7 @@ function CreateRecipe() {
           {msg ? <h4>{msg.error || msg.success}</h4> : null}
           
     </form>
+    </div>
   )
 }
 
