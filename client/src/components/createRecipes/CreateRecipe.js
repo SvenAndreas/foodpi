@@ -72,8 +72,8 @@ function CreateRecipe() {
   const handleSubmit = async (e)=>{
     e.preventDefault()
     try{
-      if(!input.name || !input.summary || !input.diets || !input.dishTypes || !input.image || !input.readyInMinutes || !input.analyzedInstructions || !input.healthScore){
-        setMsg(msg => ({...msg,error:"Required fields can't be empty"}))
+      if(errors.name || errors.summary || errors.diets || errors.dishTypes ||errors.image || errors.readyInMinutes || errors.analyzedInstructions || errors.healthScore){
+        setMsg(msg => ({...msg,error:"🚨Required fields can't be empty "}))
         setTimeout(()=>{
           setMsg(msg=>({...msg,error:""}))
         },3000)
@@ -98,19 +98,22 @@ function CreateRecipe() {
     <form className={s.form_container}>
 
         <div className={s.form_container_name}>
+         <Link to="/home">
+          <button className={s.btn_name}>Home</button>
+         </Link>
          <h3>Create Recipe</h3>
         </div>
 
         <div className={s.form_container_div}>
-          <label className={s.label} id="f" htmlFor='name'>Recipe name:</label>
-          <input onChange={(e)=>handleInput(e)} name='name'id='name' value={input.name} placeholder="Enter name..." className={!errors.name ? s.ok : s.form_container_div_input}></input>
+          <label className={s.label} htmlFor='name'>Recipe name:</label>
+          <input autoComplete='off' onChange={(e)=>handleInput(e)} name='name'id='name' value={input.name} placeholder="Enter name..." className={!errors.name ? s.ok : s.form_container_div_input}></input>
           {errors.name ? <p>{errors.name}</p> : null}
         </div>
         
         
         <div className={s.form_container_div}>
-          <label className={s.label} htmlFor='healthScore'>Health Score:</label>
-          <input onChange={(e)=>handleInput(e)} name="healthScore" value={input.healthScore} placeholder="Enter health score..." className={s.form_container_div_input}></input>
+          <label className={s.label}  htmlFor='healthScore'>Health Score:</label>
+          <input autoComplete='off' onChange={(e)=>handleInput(e)} id="healthScore" name="healthScore" value={input.healthScore} placeholder="Enter health score..." className={!errors.healthScore ? s.ok : s.form_container_div_input}></input>
           {errors.healthScore ? <p>{errors.healthScore}</p> : null}
         </div>
         
@@ -118,7 +121,7 @@ function CreateRecipe() {
 
         <div className={s.form_container_div}>
           <label className={s.label} htmlFor='readyInMinutes'>Ready in minutes:</label>
-          <input onChange={(e)=>handleInput(e)} name='readyInMinutes' value={input.readyInMinutes} placeholder="Enter minutes.."  className={s.form_container_div_input}/>
+          <input autoComplete='off' onChange={(e)=>handleInput(e)} id="readyInMinutes" name='readyInMinutes' value={input.readyInMinutes} placeholder="Enter minutes.."  className={!errors.readyInMinutes? s.ok : s.form_container_div_input}/>
           {errors.readyInMinutes ? <p>{errors.readyInMinutes}</p> : null}
         </div>
         
@@ -141,19 +144,20 @@ function CreateRecipe() {
               <input onChange={(e)=>handleSelect(e)} name="diets" type="checkbox" id={e.name} value={e.name} />
             </div>)
           })}
+          {errors.diets ? <p className={s.errors_diets }>{errors.diets}</p> : null}
         </div>
-        {errors.diets ? <p>{errors.diets}</p> : null}
+        
 
         <div className={s.form_container_div}>
-          <label className={s.label} htmlFor='dishTypes'>Dish type:</label>
-          <input onChange={(e)=>handleInput(e)} name='dishTypes' value={input.dishTypes} placeholder="Enter dish type..." className={s.form_container_div_input}/>
+          <label className={s.label} id="dishTypes" htmlFor='dishTypes'>Dish type:</label>
+          <input autoComplete='off' onChange={(e)=>handleInput(e)} name='dishTypes' id="dishTypes" value={input.dishTypes} placeholder="Enter dish type..." className={!errors.dishTypes ? s.ok : s.form_container_div_input}/>
           {errors.dishTypes ? <p>{errors.dishTypes}</p> : null}
         </div>
         
 
         <div className={s.form_container_div}>
-          <label className={s.label_textarea}htmlFor='summary'>Summary:</label>
-          <textarea onChange={(e)=>handleInput(e)} name='summary' value={input.summary} placeholder="Enter summary..." className={errors.summary ? s.danger : s.ok}/>
+          <label className={s.label_textarea} htmlFor='summary'>Summary:</label>
+          <textarea autoComplete='off' onChange={(e)=>handleInput(e)} name='summary' id="summary" value={input.summary} placeholder="Enter summary..." className={!errors.summary ? s.ok_textarea : s.form_container_div_textarea}/>
           {errors.summary ? <p>{errors.summary}</p> : null}
         </div>
       
@@ -161,24 +165,29 @@ function CreateRecipe() {
 
         <div className={s.form_container_div}>
           <label className={s.label_textarea} htmlFor='analyzedInstructions'>Instructions:</label>
-          <textarea onChange={(e)=>handleInput(e)} name='analyzedInstructions' value={input.analyzedInstructions} placeholder="Enter instructions..." className={errors.analyzedInstructions ? s.danger : s.ok}/>
+          <textarea autoComplete='off' onChange={(e)=>handleInput(e)} id="analyzedInstructions" name='analyzedInstructions' value={input.analyzedInstructions} placeholder="Enter instructions..." className={!errors.analyzedInstructions ? s.ok_textarea : s.form_container_div_textarea}/>
           {errors.analyzedInstructions ? <p>{errors.analyzedInstructions}</p> : null}
         </div>
         
 
         <div className={s.form_container_div}>
           <label className={s.label} htmlFor='image'>Image URL:</label>
-          <input onChange={(e)=>handleInput(e)} name="image" value={input.image}
-          placeholder="Insert image URL..." className={s.form_container_div_input}></input>
+          <input autoComplete='off' onChange={(e)=>handleInput(e)} name="image" id="image" value={input.image}
+          placeholder="Insert image URL..." className={!errors.image ? s.ok : s.form_container_div_input}></input>
           {errors.image ? <p>{errors.image}</p> : null}
         </div>
         
-        <div>
-          <button onClick={handleSubmit}type='submit'>Create recipe</button>
-          <Link to="/home"><button>Home</button></Link>
+        <div className={s.container_msg_upload}>
+           {msg ? <h5 className={msg.error ? s.upload_msg_err : s.upload_msg_suc}>{msg.error || msg.success}</h5> : null}
+         </div>
+
+
+        <div className={s.container_buttons}>
+          <Link to="/home">
+            <button className={s.btn}>Home</button>
+          </Link>
+          <button className={s.btn} onClick={handleSubmit}type='submit'>Create recipe</button>
         </div>
-          
-          {msg ? <h4>{msg.error || msg.success}</h4> : null}
           
     </form>
     </div>

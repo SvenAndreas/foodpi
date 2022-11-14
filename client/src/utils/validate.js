@@ -9,7 +9,7 @@ export const validate = (input) => {
 
   if (!input.healthScore) {
     errors.healthScore = "*Health score is required";
-  } else if (!/[0-9]/.test(input.healthScore)) {
+  } else if (!/^\d+$/.test(input.healthScore)) {
     errors.healthScore = "*Only accept numbers";
   } else if (input.healthScore < 0 || input.healthScore > 100) {
     errors.healthScore = "*Numbers (1 to 100)";
@@ -30,12 +30,14 @@ export const validate = (input) => {
 
   if (!input.readyInMinutes) {
     errors.readyInMinutes = "*Minutes are required";
-  } else if (!/[0-9]/.test(input.readyInMinutes)) {
+  } else if (!/^\d+$/.test(input.readyInMinutes)) {
     errors.readyInMinutes = "*Only accepts numbers";
   }
 
   if (!input.dishTypes) {
     errors.dishTypes = "*Dish type is required";
+  }else if (/^\d+$/.test(input.dishTypes)){
+    errors.dishTypes = "*Numbers not accepted"
   }
 
   if (!input.image) {
