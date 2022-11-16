@@ -1,6 +1,8 @@
 
 .search_container{
-    margin: auto;
+    align-self: center;
+    margin-left: 10rem;
+    margin-right: 7rem;
 }
 
 .search_inputs_container{
@@ -24,7 +26,7 @@
 .search_img_container_fs{
     background-color: rgb(240, 235, 235);
     position: absolute;
-    right: 19.2rem;
+    right: 25.2rem;
     height: 4.2rem;
     width: 4rem;
     display: grid;

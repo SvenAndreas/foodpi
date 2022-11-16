@@ -8,7 +8,7 @@ import logo from "../../media/images/logo.png"
 import { connect } from 'react-redux'
 import SearchBar from '../searchBar/SearchBar'
 
-export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage,orderHealthScore,searchByName,allRecipes,recipes}) {
+export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage,orderHealthScore,searchByName,allRecipes}) {
     // const dispatch = useDispatch()
     // const allDiets = useSelector(state=> state.diets)
     const [name,setName] = useState("")
@@ -45,15 +45,6 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
         setOrder(`${e.target.value}`)
     }
 
-    const handleInputChange = (e)=>{
-        e.preventDefault()
-        setName(e.target.value)
-    }
-
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-        searchByName(name)
-    }
 
   return (
     <div className={s.navContainer}>
@@ -71,12 +62,13 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
                 </button>
             </div> */}
             <SearchBar allRecipes={allRecipes}/>
+            <Link to="/createrecipes" className={s.navContainer_link}>
+             <button className={s.navContainer_create_button}>Create recipe</button>
+            </Link>
        </div>
 
         <div className={s.optionsContainer} >
-            <Link to="/createrecipes" className={s.navContainer_link}>
-             <button className='navCreate'>Create recipe</button>
-            </Link>
+            
             <button onClick={e=> resetRecipes(e)}>Reset recipes</button>
            
             <div className={s.navContainer_options}>
@@ -105,6 +97,9 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
                 ))}
                 </select>
             </div>
+
+           
+
         </div>
 
     </div>

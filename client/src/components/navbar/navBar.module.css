@@ -6,7 +6,7 @@
     background-color: #fff;
     /* border-bottom: 3rem solid rgb(233, 233, 233); */
     width: 100%;
-    height: 10rem;
+    height: 11rem;
     z-index: 100;
     background-image: url("../../media/images/fondo.jpg");
     background-size:cover;
@@ -17,27 +17,29 @@
     color:#fff;
     font-size: 1rem;
     font-weight: 400;
-    margin-right: 0.5rem;
+    margin-right: 0.2rem;
     border:none;
-    background-color: #be0b3e;
-    width: 15rem;
+    background-color: #c44569;
+    width: 12rem;
     color: #fff;
-    height: 2rem;
-    border-radius: 10%;
+    height: 3rem;
+    border-radius: 1rem;
     text-align: center;
     user-select: none;
     margin: 1rem;
+    padding-top:0.6rem;
     /* font-family: 'Playfair Display SC'; */
 }
 .navContainer button{
     border:none;
-    background-color: #be0b3e;
+    background-color: #c44569;
     width: 8rem;
     color: #fff;
-    height: 2rem;
-    border-radius: 10%;
+    height: 3rem;
+    border-radius: 1rem;
     font-size: 1rem;
     font-weight: 500;
+    text-align: center;
     transition: 0.2s all;
     cursor: pointer;
     margin: 0.4rem;
@@ -60,6 +62,8 @@
     justify-self: flex-start;
     margin-left: 1rem;
     animation: translate 0.5s linear infinite ,shrink 1s linear infinite;
+    width: 10rem;
+    margin-left: 0;
 }
 @keyframes shrink {
     50%{transform: scale(0.98);}
@@ -71,47 +75,10 @@
     /* 100% {transform: rotate(30deg);} */
 }
 
-.navContainer_searchBar_searchInput{
-    align-self: center;
-    margin: auto;
-}
-.navContainer_searchBar_searchInput input{
-    align-self: center;
-    margin: 0;
-    width: 30rem;
-    height: 3rem;
-    border-radius: 10%;
-    outline: none;
-    margin: 1rem 1rem 1rem 0;
-    padding: 1rem;
-}
-.navContainer_searchBar_searchInput input:focus::placeholder{
-    color:transparent
-}
-::placeholder{
-    font-weight: 600;
-    align-self: center;
-}
-
-.navContainer_searchBar_searchInput button img{
-    width: 1rem;
-    align-self: center;
-    margin: 0rem 0.5rem 0rem 0rem;
-}
-
-
-.navContainer_searchBar img{
-    width: 10rem;
-    margin-left: 0;
-}
-
 .optionsContainer {
     display: flex;
     justify-content: space-evenly;
-}
-
-.navContainer button {
-    align-self: center;
+    align-items: center;
 }
 
 .navContainer_link {
@@ -130,4 +97,10 @@
 }
 .navContainer_options p{
     align-self: center;
+}
+
+.navContainer_options select{
+   color:black;
+   border:2px solid #c44569;
+   width: 8rem;
 }
