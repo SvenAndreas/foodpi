@@ -11,6 +11,7 @@
     background-image: url("../../media/images/fondo.jpg");
     background-size:cover;
     background-repeat: no-repeat;
+    /* background-color: black; */
 }   
 
 .navContainer_p{

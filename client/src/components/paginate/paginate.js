@@ -15,11 +15,11 @@ function Paginate({
   }
 
   return (
-    <nav className={s.navContainer}>
+    <div className={s.paginateContainer}>
       {!allRecipes ? (
         <h1>loading</h1>
       ) : (
-        <div>
+        <div className={s.paginateContainer_div}>
           <button onClick={() => goBackWards()}> {"<"}</button>
           {pageNumbers &&
             pageNumbers.map((e) => (
@@ -28,7 +28,7 @@ function Paginate({
           <button onClick={() => goFoward()}>{">"}</button>
         </div>
       )}
-    </nav>
+    </div>
   );
 }
 

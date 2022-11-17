@@ -8,6 +8,7 @@ import fs from "../../media/images/fs.png";
 function SearchBar({ allRecipes }) {
   const [filteredData, setFilteredData] = useState([]);
   const [name, setName] = useState("");
+  const [active, setActive] = useState(false)
   const dispatch = useDispatch();
 
   // console.log(allRecipes)
@@ -16,10 +17,9 @@ function SearchBar({ allRecipes }) {
     const searchWord = e.target.value;
     const newFilter =
       allRecipes.length > 0
-        ? allRecipes.filter((e) =>
-            e.name.toLowerCase().includes(searchWord.toLowerCase())
-          )
-        : [];
+      ? allRecipes.filter((e) => e.name.toLowerCase().includes(searchWord.toLowerCase()))
+      : [];
+    setActive(true)
     setName(searchWord);
     searchWord === "" ? setFilteredData([]) : setFilteredData(newFilter);
   };
@@ -39,8 +39,6 @@ function SearchBar({ allRecipes }) {
 
   const handleSearchSelection = (e) => {
     setFilteredData([]);
-    const input = document.getElementById("searchBar");
-    input.value = e.target.innerHTML;
     dispatch(searchByName(e.target.innerHTML));
     setName("")
   };
@@ -48,9 +46,10 @@ function SearchBar({ allRecipes }) {
     const input = document.getElementById("searchBar");
     input.value = "";
     setFilteredData([]);
+    setActive(false)
     setName("");
   };
-  //    const input = document.getElementById("searchBar")
+    
   return (
     <div className={s.search_container}>
       <div className={s.search_inputs_container}>
@@ -59,16 +58,16 @@ function SearchBar({ allRecipes }) {
           placeholder="Enter recipe name..."
           onChange={handleFilter}
           onKeyDown={hadlePress}
+          autoComplete="off"
         />
 
-        {name.length !== 0 
-            ? (
-            <div onClick={handleCancel} className={s.search_img_container_fs}>
-                <img src={fs} alt="forkAndSpoon" />
-            </div>
-            ) 
-            : null
-        }
+        {active && name.length !== 0
+        ?<div onClick={handleCancel} className={s.search_img_container_fs}>
+        <img src={fs} alt="forkAndSpoon" />
+       </div>
+       : null }
+        
+          
 
         <div onClick={handleClick} className={s.search_img_container}>
           <img src={magnifyingglass} alt="magnifyingglass" />
@@ -76,7 +75,7 @@ function SearchBar({ allRecipes }) {
 
       </div>
 
-      {filteredData.length === 0 && name.length !== 0 
+      {filteredData.length === 0 && name.length !== 0
       ? (
         <div className={s.dataResults}>
           <p className={s.dataItem}>No results with that name...</p>
