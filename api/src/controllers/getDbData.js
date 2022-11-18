@@ -37,6 +37,7 @@ const dbRecipeById = async (id)=>{
         // console.log("ESTO ES",recipe[0].dataValues.summary)
         // return recipe
         return{
+            id:recipe[0].dataValues.id,
             name:recipe[0].dataValues.name,
             summary:recipe[0].dataValues.summary,
             image: recipe[0].dataValues.image,
@@ -45,6 +46,7 @@ const dbRecipeById = async (id)=>{
             readyInMinutes: recipe[0].dataValues.readyInMinutes,
             dishTypes: recipe[0].dataValues.dishTypes,
             analyzedInstructions: recipe[0].dataValues.analyzedInstructions,
+            isFromDB:recipe[0].dataValues.isFromDB,
             diets: recipe[0].dataValues.Diets
               ? await recipe[0].dataValues.Diets.map((e) => e.name)
               : "There are no diets to show",

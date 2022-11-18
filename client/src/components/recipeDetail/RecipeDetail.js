@@ -1,18 +1,30 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import {useSelector,useDispatch} from "react-redux"
-import { Link, useParams } from 'react-router-dom'
-import { getRecipeById } from '../../redux/actions'
+import { Link, useParams} from 'react-router-dom'
+import { deleteRecipe, getRecipeById } from '../../redux/actions'
 import s from "./RecipeDetail.module.css"
 
-function RecipeDetail() {
+function RecipeDetail(props) {
+
+  const [msg, setMsg] = useState({success:""})
+  
   const details = useSelector(state=> state.recipeDetails)
   const dispatch = useDispatch()
   const {id} = useParams()
  useEffect(()=>dispatch(getRecipeById(id))
  ,[])
-
+ 
   const summaryToHtml = ()=>{
      return{__html:details.summary}
+  }
+
+  const handleDelete = ()=>{
+    dispatch(deleteRecipe(details.id))
+    setMsg(msg => ({...msg,success:"Recipe deleted successfully"}))
+        setTimeout(()=>{
+          setMsg(msg=>({...msg,success:""}))
+          props.history.push("/home")
+        },2000)
   }
 
   return (
@@ -21,6 +33,19 @@ function RecipeDetail() {
           <Link to="/home">
             <button>Go back</button>
           </Link>
+
+          {msg 
+          ?<div className={ s.container_button_p }>
+            <p>{msg.success}</p>
+          </div>
+          :<div></div>}
+
+            {details.isFromDB 
+            ?<div className={s.container_button_db}>
+              <button onClick={handleDelete}>Delete</button>
+              <button>Update</button>
+             </div>
+            :null }
       </div>
 
       <div className={s.container_sub}>

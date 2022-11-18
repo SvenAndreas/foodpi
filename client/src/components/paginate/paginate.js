@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./paginate.module.css";
+import food from "../../media/images/food.gif"
 
 function Paginate({
   recipesPerPage,
@@ -14,10 +15,13 @@ function Paginate({
     pageNumbers.push(i);
   }
 
-  return (
+  return (  
     <div className={s.paginateContainer}>
       {!allRecipes ? (
-        <h1>loading</h1>
+        <div className={s.paginateContainer_loading}>
+          <img src={food} alt="waiting gif" />
+          <p>Loading...</p>
+        </div>
       ) : (
         <div className={s.paginateContainer_div}>
           <button onClick={() => goBackWards()}> {"<"}</button>

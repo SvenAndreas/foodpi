@@ -95,7 +95,7 @@ export const searchByName = (payload)=>{
 export const postRecipe = (payload) =>{
     return async function (dispatch){
         try{
-            fetch("http://localhost:3001/recipes",{
+           await fetch("http://localhost:3001/recipes",{
                 method: "POST",
                 headers:{
                     "Accept": "application/json",
@@ -104,6 +104,19 @@ export const postRecipe = (payload) =>{
                 body: JSON.stringify(payload)
             })
         }catch(e){
+            return e.message
+        }
+    }
+}
+
+export const deleteRecipe = (payload)=>{
+    return async function (dispatch){
+        try{
+            fetch(`http://localhost:3001/recipes/${payload}`,{
+                    method: "DELETE"
+                })
+        }
+        catch(e){
             return e.message
         }
     }

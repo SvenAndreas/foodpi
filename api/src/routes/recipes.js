@@ -29,7 +29,7 @@ router.get("/recipes", async (req,res)=>{
 
 router.get("/recipes/:id", async(req,res)=>{
     const id = req.params.id
-    console.log(id)
+    // console.log(id)
     try{
         const details = await apiRecipesById(id)
         console.log(details)
@@ -71,6 +71,22 @@ router.post("/recipes", async(req,res)=>{
         res.json(newRecipe)
     }catch(e){
         res.status(400).send(e.message)
+    }
+})
+
+router.delete("/recipes/:id", async(req,res)=>{
+    const id = req.params.id
+    // console.log(id)
+    try{
+       const deleted = await Recipe.findByPk(id)
+       await Recipe.destroy({
+        where:{
+            id: id
+        }
+       })
+       res.json(`Recipe ${deleted.name} was deleted successfully`)
+    }catch(e){
+        res.status(404).send(e)
     }
 })
 

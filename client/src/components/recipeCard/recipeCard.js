@@ -12,7 +12,7 @@ function RecipeCard({id,healthScore,name,image,diets}) {
 
         <div className={s.container_info}>
           <p>Health Score: {healthScore}</p>
-          <p>Diets: {diets}</p>
+          <p>Diets: {diets.join(" - ")}</p>
         </div>
         
         <Link  className={s.link}to={`/details/${id}`}>
