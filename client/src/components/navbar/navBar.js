@@ -11,7 +11,6 @@ import SearchBar from '../searchBar/SearchBar'
 export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage,orderHealthScore,searchByName,allRecipes}) {
     // const dispatch = useDispatch()
     // const allDiets = useSelector(state=> state.diets)
-    const [name,setName] = useState("")
   
     const allDiets = diets
     useEffect( ()=>{

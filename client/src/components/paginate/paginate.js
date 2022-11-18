@@ -17,12 +17,7 @@ function Paginate({
 
   return (  
     <div className={s.paginateContainer}>
-      {!allRecipes ? (
-        <div className={s.paginateContainer_loading}>
-          <img src={food} alt="waiting gif" />
-          <p>Loading...</p>
-        </div>
-      ) : (
+      
         <div className={s.paginateContainer_div}>
           <button onClick={() => goBackWards()}> {"<"}</button>
           {pageNumbers &&
@@ -31,7 +26,7 @@ function Paginate({
             ))}
           <button onClick={() => goFoward()}>{">"}</button>
         </div>
-      )}
+      
     </div>
   );
 }

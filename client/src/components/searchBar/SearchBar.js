@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import s from "./searchBar.module.css";
 import magnifyingglass from "../../media/images/lupa.png";
-import { useDispatch } from "react-redux";
-import { searchByName } from "../../redux/actions";
+import { useDispatch,useSelector } from "react-redux";
+import { searchByName, setLoading } from "../../redux/actions";
 import fs from "../../media/images/fs.png";
 
 function SearchBar({ allRecipes }) {
@@ -10,7 +10,7 @@ function SearchBar({ allRecipes }) {
   const [name, setName] = useState("");
   const [active, setActive] = useState(false)
   const dispatch = useDispatch();
-
+ 
   // console.log(allRecipes)
 
   const handleFilter = (e) => {
@@ -26,6 +26,7 @@ function SearchBar({ allRecipes }) {
 
   const hadlePress = (e) => {
     if (e.key === "Enter") {
+      dispatch(setLoading())
       dispatch(searchByName(name));
       setFilteredData([]);
       setName("")
@@ -34,11 +35,14 @@ function SearchBar({ allRecipes }) {
 
   const handleClick = () => {
     setFilteredData([]);
+    dispatch(setLoading())
     dispatch(searchByName(name));
+    setName("")
   };
 
   const handleSearchSelection = (e) => {
     setFilteredData([]);
+    dispatch(setLoading())
     dispatch(searchByName(e.target.innerHTML));
     setName("")
   };

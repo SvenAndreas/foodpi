@@ -5,6 +5,7 @@ export const FILTER_ALPHA = "FILTER_BY_ALPHA"
 export const FILTER_BY_HEALTHSCORE = "FILTER_BY_HEALTHSCORE"
 export const GET_RECIPES_BY_ID = "GET_RECIPES_BY_ID"
 export const GET_RECIPE_BY_NAME = "GET_RECIPE_BY_NAME"
+export const SET_LOADING = "SET_LOADING"
 
 
 export const getRecipes = ()=>{
@@ -119,5 +120,13 @@ export const deleteRecipe = (payload)=>{
         catch(e){
             return e.message
         }
+    }
+}
+
+export const setLoading = ()=>{
+    return async function(dispatch){
+        return dispatch({
+            type: SET_LOADING
+        })
     }
 }
