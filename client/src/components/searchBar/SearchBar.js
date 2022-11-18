@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import s from "./searchBar.module.css";
 import magnifyingglass from "../../media/images/lupa.png";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { searchByName, setLoading } from "../../redux/actions";
 import fs from "../../media/images/fs.png";
 

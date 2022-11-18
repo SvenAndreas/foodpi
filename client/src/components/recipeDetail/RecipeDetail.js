@@ -1,8 +1,9 @@
 import React,{useEffect,useState} from 'react'
 import {useSelector,useDispatch} from "react-redux"
 import { Link, useParams} from 'react-router-dom'
-import { deleteRecipe, getRecipeById } from '../../redux/actions'
+import { deleteRecipe, getRecipeById} from '../../redux/actions'
 import s from "./RecipeDetail.module.css"
+import food from "../../media/images/food.gif"
 
 function RecipeDetail(props) {
 
@@ -11,8 +12,10 @@ function RecipeDetail(props) {
   const details = useSelector(state=> state.recipeDetails)
   const dispatch = useDispatch()
   const {id} = useParams()
- useEffect(()=>dispatch(getRecipeById(id))
- ,[])
+
+ useEffect(()=>{
+ dispatch(getRecipeById(id))
+},[])
  
   const summaryToHtml = ()=>{
      return{__html:details.summary}
@@ -27,7 +30,8 @@ function RecipeDetail(props) {
         },2000)
   }
 
-  return (
+  return Object.keys(details).length > 0
+  ? (
     <div className={s.container}>
       <div className={s.container_button}>
           <Link to="/home">
@@ -98,6 +102,12 @@ function RecipeDetail(props) {
 
       </div>
 
+    </div>
+  )
+  : (
+    <div className={s.loadingContainer}>
+      <img src={food} alt="loading gif"/>
+      <h3>Loading...</h3>
     </div>
   )
 }
