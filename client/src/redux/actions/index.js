@@ -12,7 +12,7 @@ export const getRecipes = ()=>{
     return async function (dispatch) {
         const recipes = await fetch ("http://localhost:3001/recipes")
         const data = await recipes.json()
-        console.log(data)
+        // console.log(data)
         return dispatch({
             type:GET_RECIPES,
             payload: data
@@ -64,7 +64,7 @@ export const orderHealthScore = (payload) => {
 }
 
 export const getRecipeById = (payload)=>{
-    console.log(payload)
+    // console.log(payload)
     return async function (dispatch){
        const recipe = await fetch(`http://localhost:3001/recipes/${payload}`)
        const data = await recipe.json()
@@ -81,7 +81,7 @@ export const searchByName = (payload)=>{
         try{
             const recipe = await fetch(`http://localhost:3001/recipes?name=${payload}`)
             const data = await recipe.json();
-            console.log(data)
+            // console.log(data)
             return dispatch({
                 type: GET_RECIPE_BY_NAME,
                 payload:data
@@ -110,6 +110,14 @@ export const postRecipe = (payload) =>{
     }
 }
 
+export const setLoading = ()=>{
+    return async function(dispatch){
+        return dispatch({
+            type: SET_LOADING
+        })
+    }
+}
+
 export const deleteRecipe = (payload)=>{
     return async function (dispatch){
         try{
@@ -123,10 +131,21 @@ export const deleteRecipe = (payload)=>{
     }
 }
 
-export const setLoading = ()=>{
+export const updateRecipe = (payload,id)=>{
     return async function(dispatch){
-        return dispatch({
-            type: SET_LOADING
-        })
+        // console.log(payload,id)
+        try{
+          fetch(`http://localhost:3001/recipes/${id}`,{
+                method: "PUT",
+                headers:{
+                    "Accept": "application/json",
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+        }catch(e){
+            return e
+        }
     }
 }
+

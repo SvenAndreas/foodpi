@@ -19,7 +19,6 @@ function CreateRecipe() {
     dishTypes:"",
     image:""
  })
- console.log(input.diets.length)
 
  const errorsIntialState = {
   name: "*Name is required",

@@ -1,22 +1,50 @@
 import React,{useEffect,useState} from 'react'
 import {useSelector,useDispatch} from "react-redux"
 import { Link, useParams} from 'react-router-dom'
-import { deleteRecipe, getRecipeById} from '../../redux/actions'
+import { deleteRecipe, getDiets, getRecipeById, updateRecipe} from '../../redux/actions'
 import s from "./RecipeDetail.module.css"
 import food from "../../media/images/food.gif"
+import {validateUpdate} from "../../utils/validateUpdate.js"
 
 function RecipeDetail(props) {
 
-  const [msg, setMsg] = useState({success:""})
+  const [diets, setDiets]= useState([])
+  const [msg, setMsg] = useState({success:"",error:""})
+  const [errors, setErrors] = useState({})
+
   
   const details = useSelector(state=> state.recipeDetails)
+  const allDiets = useSelector(state=>state.diets)
   const dispatch = useDispatch()
   const {id} = useParams()
 
  useEffect(()=>{
  dispatch(getRecipeById(id))
+ dispatch(getDiets())
 },[])
- 
+
+const [input, setInput] = useState({
+  name:"",
+  healthScore:"",
+  diets:[],
+  summary:"",
+  analyzedInstructions:"",
+  readyInMinutes:"",
+  dishTypes:"",
+  image:""
+})
+
+const initialState ={
+  name:"",
+  healthScore:"",
+  diets:[],
+  summary:"",
+  analyzedInstructions:"",
+  readyInMinutes:"",
+  dishTypes:"",
+  image:""
+}
+
   const summaryToHtml = ()=>{
      return{__html:details.summary}
   }
@@ -30,9 +58,151 @@ function RecipeDetail(props) {
         },2000)
   }
 
+  const handleSelect= (e)=>{
+    const checked = e.target.checked
+    const value = e.target.value
+    console.log(value)
+    if(checked){
+      diets.push(value)
+      setInput(prev=> ({...prev,diets:diets}))
+      console.log(diets)
+    }else{
+      diets.pop()
+      setInput(prev=> ({...prev,diets:diets}))
+      setDiets(diets => diets)
+    }
+  }
+
+  const handleInput = (e)=>{
+    setInput(prev=>({...prev,[e.target.name]:e.target.value}))
+    setErrors(validateUpdate({...input,[e.target.name]:e.target.value}))
+  }
+
+  const handleCancel = (e)=>{
+    e.preventDefault()
+    
+    const check = document.getElementById("display");
+    const displayed = document.getElementById("displayed")
+    const form = document.getElementById("form")
+   
+  
+    if(check.checked){
+      check.checked = false
+      displayed.style.visibility="hidden"
+      displayed.style.opacity="0"
+      form.style.scale="0.1"
+    }else{
+      check.checked = true
+      displayed.style.visibility="visible"
+      displayed.style.opacity="1"
+      form.style.scale="1"
+    }
+  }
+
+  const handleSubmit = async (e)=>{
+    try{
+      if(errors.name || errors.dishTypes || errors.image || errors.readyInMinutes || errors.healthScore){
+        setMsg(msg => ({...msg,error:"🚨Modify fields"}))
+        e.preventDefault()
+        setTimeout(()=>{
+          setMsg(msg=>({...msg,error:""}))
+        },3000)
+        return
+      }else{
+        dispatch(updateRecipe(input,id))
+        setInput(initialState)
+        dispatch(getRecipeById(id))
+        setMsg(msg => ({...msg,success:"Successfully modified😊"}))
+        setTimeout(()=>{
+          setMsg(msg=>({...msg,success:""}))
+        },3000)
+      }
+    }catch(e){
+      setMsg(msg => ({...msg,error:e.message}))
+        setTimeout(()=>{
+          setMsg(msg=>({...msg,error:""}))
+        },3000)
+    }
+  }
+
   return Object.keys(details).length > 0
   ? (
     <div className={s.container}>
+
+      <input className={s.display_input} type="checkbox" id="display"/>
+
+      <div id="displayed" className={s.container_update}>
+
+        <form id="form" className={s.container_update_form}>
+
+          <div className={s.container_update_title}>
+              <h2>Update Recipe</h2>
+          </div>
+
+          <div className={s.container_update_form_info}>
+
+            <div className={s.container_update_inputs}>
+
+              <div className={s.container_update_inputs_sub}>
+                <label>Name:</label>
+                <input onChange={handleInput} value={input.name}  autoComplete="off" name="name" placeholder='Enter a name...'/>
+                {errors.name ? <p>{errors.name}</p> : null}
+              </div>
+              <div className={s.container_update_inputs_sub}>
+                <label>Health score:</label>
+                <input onChange={handleInput} value={input.healthScore} autoComplete="off" name="healthScore" placeholder="Enter health score..."/>
+                {errors.healthScore ? <p>{errors.healthScore}</p> : null}
+              </div>
+              <div className={s.container_update_inputs_sub}>
+                <label>Ready in minutes:</label>
+                <input onChange={handleInput} value={input.readyInMinutes} autoComplete="off" name="readyInMinutes" placeholder='Enter minutes...' />
+                {errors.readyInMinutes ? <p>{errors.readyInMinutes}</p> : null}
+              </div>
+              <div className={s.container_update_inputs_sub}>
+                <label>Dish types:</label>
+                <input onChange={handleInput} value={input.dishTypes} autoComplete="off" name="dishTypes"/>
+                {errors.dishTypes ? <p>{errors.dishTypes}</p> : null}
+              </div>
+              <div className={s.container_update_inputs_sub}>
+                <label>Image:</label>
+                <input onChange={handleInput} value={input.image} autoComplete="off" name="image"/>
+                {errors.image ? <p>{errors.image}</p> : null}
+              </div>
+              
+              <label>Summary:</label>
+              <textarea onChange={handleInput} value={input.summary} autoComplete="off" name="summary"/>
+
+              <label>Analyzed instructions:</label>
+              <textarea onChange={handleInput} value={input.analyzedInstructions} autoComplete="off" name="analyzedInstructions"/>
+             
+            </div>
+          
+            <div className={s.container_update_form_diets}>
+              <label className={s.container_update_form_diets_label}>Diets:</label>
+            {allDiets && allDiets.map(e=>{  
+                return( 
+                        <div key={e.name} className={s.checkBox_container}>
+                          <label className={s.checkBox_label} htmlFor={e.name}>{e.name}</label>
+                          <input onChange={(e)=>handleSelect(e)} name="diets" type="checkbox" id={e.name} value={e.name} />
+                        </div>
+                    )
+                  }
+                )
+            }
+              <div className={s.container_update_form_buttons}>
+                <button onClick={handleCancel}>Cancel</button>  
+                <button onClick={handleSubmit}>Update</button>
+              </div>
+              {msg ? <p className={msg.error ? s.update_msg_err : s.update_msg_ok }>{msg.error || msg.success}</p> : null }
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+      
+        
+
       <div className={s.container_button}>
           <Link to="/home">
             <button>Go back</button>
@@ -47,7 +217,7 @@ function RecipeDetail(props) {
             {details.isFromDB 
             ?<div className={s.container_button_db}>
               <button onClick={handleDelete}>Delete</button>
-              <button>Update</button>
+              <button onClick={handleCancel}>Update</button>
              </div>
             :null }
       </div>

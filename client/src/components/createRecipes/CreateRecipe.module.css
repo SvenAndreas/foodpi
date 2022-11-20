@@ -16,14 +16,14 @@
     width: 50rem;
     margin: 1rem auto ;
     flex-wrap: wrap;
-    background-color: rgba(22, 22, 22, 0.521);
+    background-color: rgba(221, 218, 218, 0.73);
     backdrop-filter: blur(2px);
     border-radius: 20px;
 }
 
 .form_container_name{
     /* background-color: rgba(0, 0, 0, 0.486); */
-    background-color: rgba(22, 22, 22, 0.404);
+    background-color: rgba(147, 143, 143, 0.73);
     width: 100%;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
@@ -53,7 +53,7 @@
 .form_container_name h3{
     color: white;
     letter-spacing: 0.1rem;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 25px;
 }
 
@@ -73,33 +73,35 @@
     border-radius: 15px;
     padding: 1.2rem;
     background: none;
-    border:2px solid rgb(182, 179, 179);
-    color: white;
+    border:2px solid rgb(85, 85, 85);
+    color: black;
     font-weight: 500;
     
 }
 .form_container_div_input:hover{
     border-color: aliceblue;
+
 }
 .form_container_div_input:focus{
     border-color: rgb(0, 0, 0);
 }
 
 .ok:not(:placeholder-shown){
-    background-color: rgba(57, 160, 57, 0.377);
+    background-color: rgba(48, 79, 48, 0.377);
     position:relative;
     height: 3.4rem;
     width: 30rem;
     outline: none;
     border-radius: 15px;
     padding: 1.2rem;
-    border:2px solid rgb(75, 255, 40);
+    border:2px solid rgb(93, 128, 85);
     color: white;
     font-weight: 500;
+    transition: all .5s ease;
 }
 
 .form_container_div_input::placeholder{
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(73, 73, 73, 0.95);
     font-weight: 50 ;
     letter-spacing: 1px;
 }
@@ -121,7 +123,7 @@
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.05rem;
-    background-color: rgb(34, 33, 33);
+    background-color: #c44569;
     backdrop-filter: blur(2px);
     border-radius: 20px;
     z-index: 2;
@@ -211,7 +213,7 @@
     cursor: pointer;
     padding-top: 0.2rem;
     display: flex;
-    border: 0.13rem solid rgb(182, 179, 179);
+    border: 0.13rem solid rgb(85, 85, 85);;
     transition: 0.2s ease-in;
 }
 
@@ -240,15 +242,24 @@
     border-radius: 15px;
     padding: 1.2rem;
     background: none;
-    border:2px solid rgb(182, 179, 179);
+    border:2px solid rgb(85, 85, 85);;
     resize: none;
 }
 .form_container_div_textarea::placeholder{
-    color: white;
+    color: rgba(73, 73, 73, 0.95);
+    font-weight: 50 ;
+    letter-spacing: 1px;
 }
 
 .form_container_div textarea::-webkit-scrollbar{
     display: none;
+}
+
+.form_container_div textarea:hover{
+    border-color: aliceblue;
+}
+.form_container_div textarea:focus{
+    border-color: black;
 }
 
 .label_textarea{
@@ -267,15 +278,15 @@
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.05rem;
-    background-color: rgb(34, 33, 33);
+    background-color: #c44569;
     backdrop-filter: blur(2px);
     border-radius: 20px;
     z-index: 2;
 }
 
 .ok_textarea:not(:placeholder-shown){
-    background-color: rgba(57, 160, 57, 0.377);
-    border:2px solid rgb(75, 255, 40);
+    background-color: rgba(48, 79, 48, 0.377);
+    border:2px solid rgb(93, 128, 85);
     color: white;
     font-weight: 500;
     position:relative;

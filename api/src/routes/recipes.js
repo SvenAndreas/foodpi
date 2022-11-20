@@ -3,7 +3,8 @@ const mergeData = require("../controllers/mergeData.js")
 const {apiRecipesById} = require("../controllers/getApiData")
 const {Recipe,Diet} = require("../db.js")
 const router = Router();
-const {dbRecipeById} = require("../controllers/getDbData.js")
+const {dbRecipeById} = require("../controllers/getDbData.js");
+const {Op} = require("sequelize")
 
 
 router.get("/recipes", async (req,res)=>{
@@ -86,6 +87,58 @@ router.delete("/recipes/:id", async(req,res)=>{
        })
        res.json(`Recipe ${deleted.name} was deleted successfully`)
     }catch(e){
+        res.status(404).send(e)
+    }
+})
+
+router.put("/recipes/:id", async(req,res)=>{
+    const id = req.params.id
+    const {name,summary,healthScore,analyzedInstructions,readyInMinutes,dishTypes,diets,image} = req.body
+    try{
+        
+        if(diets.length > 0){
+            const recipe = await Recipe.findAll({
+             where:{id},
+             include:{
+                 model:Diet,
+                 attributes:["id"],
+                 through:{
+                     attributes:[]
+                 }
+             }
+            })
+             const removedDietsId = (recipe[0].dataValues.Diets.map(e=> e.dataValues.id))
+             const modified = await Recipe.findByPk(id)
+             await modified.removeDiets(removedDietsId)
+             const dietsDb = await Diet.findAll({
+                 where:{
+                     name : diets
+                 }
+             })
+             
+            await modified.addDiet(dietsDb)
+        }
+
+        const recipeBeforeUpdate = await Recipe.findByPk(id)
+
+        await Recipe.update({
+            name: name.length > 0 ? name : recipeBeforeUpdate.name ,
+            summary:summary.length > 0 ? summary : recipeBeforeUpdate.summary,
+            healthScore:Number(healthScore) > 0 ? Number(healthScore): recipeBeforeUpdate.healthScore,
+            analyzedInstructions: analyzedInstructions.length > 0 ? analyzedInstructions : recipeBeforeUpdate.analyzedInstructions,
+            readyInMinutes:Number(readyInMinutes) > 0 ? Number(readyInMinutes) : recipeBeforeUpdate.readyInMinutes,
+            dishTypes: dishTypes.length > 0 ? dishTypes : recipeBeforeUpdate.dishTypes,
+            image: image.length > 0 ? image : recipeBeforeUpdate.image
+        },{
+            where:{
+                id: id
+            }
+        })
+        
+       
+       res.json(`Recipe was successfully updated`)
+    }catch(e){
+        console.log(e)
         res.status(404).send(e)
     }
 })
