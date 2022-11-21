@@ -95,7 +95,7 @@ router.put("/recipes/:id", async(req,res)=>{
     const id = req.params.id
     const {name,summary,healthScore,analyzedInstructions,readyInMinutes,dishTypes,diets,image} = req.body
     try{
-        console.log(diets)
+        // console.log(diets)
         if(diets.length > 0){
             const recipe = await Recipe.findAll({
              where:{id},
