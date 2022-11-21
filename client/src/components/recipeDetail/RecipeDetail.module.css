@@ -23,7 +23,7 @@
     font-weight: 800;
     letter-spacing: 1px;
     color: rgba(34, 209, 57, 0.759);
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .container button{
@@ -60,6 +60,8 @@
 
 .container_sub_image img{
     border-radius: 1rem;
+    width: 35.5rem;
+    height: 23.5rem;
 }
 
 .container_sub_name{
@@ -282,5 +284,12 @@
     /* padding: 0.4rem; */
     /* border-radius: 1rem; */
     color:Red;
+    font-size: 1.2rem;
+}
+
+.update_msg_ok{
+    font-weight: 600;
+    text-align: center;
+    color:rgb(43, 119, 58);
     font-size: 1.2rem;
 }

@@ -16,14 +16,14 @@
     width: 50rem;
     margin: 1rem auto ;
     flex-wrap: wrap;
-    background-color: rgba(221, 218, 218, 0.73);
-    backdrop-filter: blur(2px);
+    background-color: rgba(255, 250, 250, 0.276);
+    backdrop-filter: blur(10px);
     border-radius: 20px;
 }
 
 .form_container_name{
     /* background-color: rgba(0, 0, 0, 0.486); */
-    background-color: rgba(147, 143, 143, 0.73);
+    background-color: rgba(147, 143, 143, 0.433);
     width: 100%;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
@@ -101,8 +101,8 @@
 }
 
 .form_container_div_input::placeholder{
-    color: rgba(73, 73, 73, 0.95);
-    font-weight: 50 ;
+    color: rgb(18, 16, 16);
+    font-weight: 600 ;
     letter-spacing: 1px;
 }
 
@@ -246,19 +246,19 @@
     resize: none;
 }
 .form_container_div_textarea::placeholder{
-    color: rgba(73, 73, 73, 0.95);
-    font-weight: 50 ;
+    color: rgb(18, 16, 16);
+    font-weight: 600 ;
     letter-spacing: 1px;
 }
 
-.form_container_div textarea::-webkit-scrollbar{
+.form_container_div_textarea::-webkit-scrollbar{
     display: none;
 }
 
-.form_container_div textarea:hover{
+.form_container_div_textarea:hover{
     border-color: aliceblue;
 }
-.form_container_div textarea:focus{
+.form_container_div_textarea:focus{
     border-color: black;
 }
 
@@ -296,6 +296,7 @@
     border-radius: 15px;
     padding: 1.2rem;
     resize: none;
+    transition: all .5s ease;
 }
 
 .upload_msg_err{

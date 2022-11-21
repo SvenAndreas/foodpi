@@ -133,7 +133,7 @@ export const deleteRecipe = (payload)=>{
 
 export const updateRecipe = (payload,id)=>{
     return async function(dispatch){
-        // console.log(payload,id)
+        console.log("esto es payload e id ",payload,id)
         try{
           fetch(`http://localhost:3001/recipes/${id}`,{
                 method: "PUT",

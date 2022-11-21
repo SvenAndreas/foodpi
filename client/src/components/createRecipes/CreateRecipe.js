@@ -20,6 +20,17 @@ function CreateRecipe() {
     image:""
  })
 
+ const initialState= {
+    name:"",
+    healthScore:"",
+    diets:[],
+    summary:"",
+    analyzedInstructions:"",
+    readyInMinutes:"",
+    dishTypes:"",
+    image:""
+ }
+
  const errorsIntialState = {
   name: "*Name is required",
   healthScore: "*Health score is required",
@@ -51,7 +62,7 @@ function CreateRecipe() {
   const handleSelect= (e)=>{
     const checked = e.target.checked
     const value = e.target.value
-    console.log(errors)
+    // console.log(errors)
     if(checked){
       diets.push(value)
       // setInput(prev=> ({...prev,diets:[...input.diets,value]}))
@@ -79,6 +90,10 @@ function CreateRecipe() {
         return
       }else{
         dispatch(postRecipe(input))
+        
+        document.querySelectorAll("input[type='checkbox']").forEach(e=> e.checked = false)
+        setErrors(errorsIntialState)
+        setInput(initialState)
         setMsg(msg => ({...msg,success:"New recipe uploaded 😊"}))
         setTimeout(()=>{
           setMsg(msg=>({...msg,success:""}))
@@ -138,7 +153,7 @@ function CreateRecipe() {
           
           {allDiets && allDiets.map(e=>{
             return( 
-            <div className={s.checkBox_container}>
+            <div key={e.name} className={s.checkBox_container}>
               <label className={s.checkBox_label} htmlFor={e.name}>{e.name}</label>
               <input onChange={(e)=>handleSelect(e)} name="diets" type="checkbox" id={e.name} value={e.name} />
             </div>)

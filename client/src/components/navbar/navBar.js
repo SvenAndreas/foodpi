@@ -1,14 +1,14 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect} from 'react'
 import s from "./navBar.module.css"
 import {Link} from "react-router-dom"
-import { filterByDiet, getDiets, getRecipes, orderAlpha, orderHealthScore, searchByName } from '../../redux/actions'
+import { filterByDiet, getDiets, getRecipes, orderAlpha, orderHealthScore, setLoading } from '../../redux/actions'
 // import { useDispatch,useSelector } from 'react-redux'
 import logo from "../../media/images/logo.png"
 // import magnifyingglass from "../../media/images/lupa.png"
 import { connect } from 'react-redux'
 import SearchBar from '../searchBar/SearchBar'
 
-export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage,orderHealthScore,searchByName,allRecipes}) {
+export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrder,setCurrentPage,orderHealthScore,allRecipes,setLoading}) {
     // const dispatch = useDispatch()
     // const allDiets = useSelector(state=> state.diets)
   
@@ -24,6 +24,10 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
     //   dispatch(getRecipes())
       getRecipes()
       setCurrentPage(1)
+      setLoading()
+      setTimeout(()=>{
+        setLoading()
+      },3500)
     }
 
     const handleFilteredDiets = (e)=>{
@@ -47,7 +51,7 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
 
   return (
     <div className={s.navContainer}>
-
+    
         <div className={s.navContainer_searchBar}>
             <div className={s.navContainer_searchBar_img}>
                 <img src={logo} alt="logo" />
@@ -73,7 +77,6 @@ export function NavBar({diets,getDiets,getRecipes,filterByDiet,orderAlpha,setOrd
             <div className={s.navContainer_options}>
                 <p className={s.navContainer_p}>Order alphabetically:</p>
                 <select onChange={(e)=>handleOrderAlpha(e)}>
-                    <option value="Default">Default</option>
                     <option value="A-Z">A-Z</option>
                     <option value="Z-A">Z-A</option>
                 </select>
@@ -118,7 +121,7 @@ function mapDispatchToProps(dispatch){
         filterByDiet: diet => dispatch(filterByDiet(diet)),
         orderAlpha: alpha => dispatch(orderAlpha(alpha)),
         orderHealthScore: score => dispatch(orderHealthScore(score)),
-        searchByName: name => dispatch(searchByName(name))
+        setLoading: function(){dispatch(setLoading())}
     }
 }
 

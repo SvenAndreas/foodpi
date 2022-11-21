@@ -23,6 +23,7 @@ function RecipeDetail(props) {
  dispatch(getDiets())
 },[])
 
+
 const [input, setInput] = useState({
   name:"",
   healthScore:"",
@@ -61,7 +62,7 @@ const initialState ={
   const handleSelect= (e)=>{
     const checked = e.target.checked
     const value = e.target.value
-    console.log(value)
+    // console.log(value)
     if(checked){
       diets.push(value)
       setInput(prev=> ({...prev,diets:diets}))
@@ -69,7 +70,7 @@ const initialState ={
     }else{
       diets.pop()
       setInput(prev=> ({...prev,diets:diets}))
-      setDiets(diets => diets)
+      // setDiets(diets)
     }
   }
 
@@ -78,14 +79,13 @@ const initialState ={
     setErrors(validateUpdate({...input,[e.target.name]:e.target.value}))
   }
 
+  
+
   const handleCancel = (e)=>{
     e.preventDefault()
-    
     const check = document.getElementById("display");
     const displayed = document.getElementById("displayed")
     const form = document.getElementById("form")
-   
-  
     if(check.checked){
       check.checked = false
       displayed.style.visibility="hidden"
@@ -100,19 +100,36 @@ const initialState ={
   }
 
   const handleSubmit = async (e)=>{
+    e.preventDefault()
     try{
       if(errors.name || errors.dishTypes || errors.image || errors.readyInMinutes || errors.healthScore){
         setMsg(msg => ({...msg,error:"🚨Modify fields"}))
-        e.preventDefault()
         setTimeout(()=>{
           setMsg(msg=>({...msg,error:""}))
         },3000)
-        return
+        return}
+        else if(input.name.length <= 0 && input.dishTypes.length <= 0 && input.image.length <= 0 && input.readyInMinutes.length <= 0 && input.healthScore.length <= 0 && input.diets.length <= 0){
+          setMsg(msg=> ({...msg,error:"No updates registered press cancel"}))
+          setTimeout(()=>{
+            setMsg(msg=>({...msg,error:""}))
+          },3000)
+          return
       }else{
         dispatch(updateRecipe(input,id))
         setInput(initialState)
-        dispatch(getRecipeById(id))
+        // .then(r=> dispatch(getRecipeById(id)))
+        setTimeout(()=>{
+          dispatch(getRecipeById(id))
+        },500)
+        document.querySelectorAll("input[type='checkbox']").forEach(e=> e.checked = false)
+        
+        document.getElementById("display").checked = false;
+        document.getElementById("displayed").style.visibility="hidden"
+        document.getElementById("displayed").style.opacity="0"
+        document.getElementById("form").style.scale="0.1"
+
         setMsg(msg => ({...msg,success:"Successfully modified😊"}))
+        setDiets([])
         setTimeout(()=>{
           setMsg(msg=>({...msg,success:""}))
         },3000)
@@ -130,7 +147,7 @@ const initialState ={
     <div className={s.container}>
 
       <input className={s.display_input} type="checkbox" id="display"/>
-
+      
       <div id="displayed" className={s.container_update}>
 
         <form id="form" className={s.container_update_form}>
@@ -193,7 +210,7 @@ const initialState ={
                 <button onClick={handleCancel}>Cancel</button>  
                 <button onClick={handleSubmit}>Update</button>
               </div>
-              {msg ? <p className={msg.error ? s.update_msg_err : s.update_msg_ok }>{msg.error || msg.success}</p> : null }
+              {msg ? <p className={s.update_msg_err}>{msg.error}</p> : null }
             </div>
 
           </div>
@@ -246,7 +263,7 @@ const initialState ={
 
           <div className={s.container_sub_details}>
             <p>Diets:</p>
-            <p>{details.diets}</p>
+            <p>{details.diets.join(" - ")}</p>
           </div>
 
           <div className={s.container_sub_details}>
