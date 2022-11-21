@@ -1,0 +1,41 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+
+}
+
+.container img{
+    border-radius: 1rem;
+}
+
+.container_titleBtn{
+    display: flex;
+    justify-content: space-between;
+    width: 30rem;
+}
+
+.container_titleBtn button{
+    cursor: pointer;
+    background: #c44569;
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border: none;
+    border-radius: 4%;
+    transition: 0.2s all;
+    height: 4rem;
+    width: 7rem;
+    margin:auto
+}
+
+.container_titleBtn button:active{
+    scale: 0.9
+}
+
+.container_titleBtn {
+    padding-bottom: 1rem;
+}

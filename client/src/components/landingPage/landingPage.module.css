@@ -2,15 +2,14 @@
     display: flex;
     height:100vh;
     align-items: center;
-    color: #fff
-}
-
-.content  {
-  max-width: 49rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin: auto;
-  text-align: center;
+    color: #fff;
+    max-width: 49rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: auto;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .videoContainer{
@@ -48,13 +47,15 @@
 .contentContainer h1 {
     font-family: roboto;
     font-size: 50px;
-    margin-bottom: 0;
+    margin-top:1rem;
     mix-blend-mode: multiply;
 }
 
-.contentContainer p {
+.contentContainer_p{
     font-size: 1.5rem;
     display: block;
+    color:white;
+    font-size: 2rem;
     margin-bottom: 3rem;
     white-space: nowrap;
     border-right: 2px solid;
@@ -63,7 +64,8 @@
     animation: typing 2s  steps(30),
     blink .5s infinite step-end alternate;
     overflow: hidden;
-
+    margin: 2rem auto;
+    z-index: 100;
 }
 @keyframes typing {
     from {width: 0;}
@@ -86,6 +88,7 @@
     border: none;
     border-radius: 4%;
     transition: 0.2s all;
+    margin-top:3rem;
 }
 .btn:active{
     scale: 0.90
