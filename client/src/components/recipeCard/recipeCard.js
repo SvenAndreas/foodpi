@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import s from "./recipeCard.module.css"
 
 function RecipeCard({id,healthScore,name,image,diets}) {
-  // console.log(diets)
+
+
   return (
     
-      <div className={s.container}>
+      <div className={s.container }>
         <img src={image} alt={name} />
         <h4>{name}</h4>
 

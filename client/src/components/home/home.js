@@ -6,6 +6,7 @@ import s from "./home.module.css"
 import NavBar from '../navbar/NavBar'
 import Paginate from '../paginate/Paginate'
 import food from "../../media/images/food.gif"
+import Footer from '../Footer/Footer'
 
 
 function Home() {
@@ -21,7 +22,7 @@ function Home() {
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
     const currentRecipes = recipes.slice(indexOfFirstRecipe,indexOfLastRecipe)
-    console.log(typeof currentRecipes)
+    // console.log(typeof currentRecipes)
     const paginate = (pageNumber)=>{
       setCurrentPage(pageNumber)
     }
@@ -83,7 +84,7 @@ function Home() {
       </div>)
       }
        
-
+      <Footer/>
 
     </div>
   )

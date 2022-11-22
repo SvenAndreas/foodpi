@@ -56,7 +56,7 @@ const initialState ={
         setTimeout(()=>{
           setMsg(msg=>({...msg,success:""}))
           props.history.push("/home")
-        },2000)
+        },1300)
   }
 
   const handleSelect= (e)=>{

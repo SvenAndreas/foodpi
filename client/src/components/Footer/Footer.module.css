@@ -1,0 +1,208 @@
+.container{
+    margin-top:1rem;
+    transition: 2s ease-in-out;
+    opacity: 1;
+    margin-bottom: 4rem;
+}
+
+.container_visible{
+    opacity: 0;
+    margin-top:1rem;
+    z-index: -100;
+}
+
+
+.back{  
+    z-index:-1;
+    width: 100%;
+    transition: all 3s;
+    
+}
+.back_img{
+    object-fit: fill;
+    width: 100%;
+    height: 15rem;
+}
+
+
+
+
+.container_info{
+    display: flex;
+    justify-content: space-around;
+}
+
+.container_personal p {
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top:.1rem
+}
+
+.container_personal h3{
+    color: black
+}
+.container_project_description p{
+    font-weight: 500;
+}
+.a_linked{
+    text-decoration: none;
+    color:black;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: 2px solid rgb(59, 145, 243);
+    padding: 0 .4rem 0 .4rem  ;
+
+}
+.a_linked img{
+    width: 1rem;
+}
+.a_git{
+    text-decoration: none;
+    color:black;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-left:2rem;
+    border: 2px solid black;
+    padding: 0 .4rem 0 .4rem  ;
+}
+.a_git img{
+    width: 1rem;
+}
+
+.container_skills{
+    display: flex;
+    border: 2px solid black;
+    border-radius: 0.4rem;
+    height: 4rem;
+    justify-content: center;
+}
+
+.react{
+    background-color: white;
+    display: grid;
+    align-items: center;
+    font-weight: 600;
+    color: rgb(39, 139, 220);
+    padding:.4rem;
+    transition: 0.4s all ease-in-out;
+    padding-left: 22px;
+    user-select: none;
+    cursor: default;
+    width: 7rem;
+    text-align: center;
+}
+
+.react:hover{
+    background-color:rgb(39, 139, 220);
+    color:white
+}
+
+.node{
+    background-color: white;
+    display: grid;
+    align-items: center;
+    font-weight: 600;
+    color: green;
+    padding:.4rem;
+    transition: 0.4s all ease-in-out;
+    user-select: none;
+    cursor: default;
+    width: 7rem;
+    text-align: center;
+
+}
+.node:hover{
+    background-color: green;
+    color:white
+}
+
+.sequelize{
+    background-color: white;
+    display: grid;
+    align-items: center;
+    font-weight: 600;
+    color: rgb(6, 110, 229);
+    padding:.4rem;
+    transition: 0.4s all ease-in-out;
+    user-select: none;
+    cursor: default;
+    text-align: center;
+    width: 7rem;
+}
+.sequelize:hover{
+    background-color:rgb(6, 110, 229) ;
+    color:white;
+}
+
+.javaScript{
+    background-color: white;
+    display: grid;
+    align-items: center;
+    font-weight: 600;
+    color: rgb(164, 164, 1);
+    padding: .4rem;
+    transition: 0.4s all ease-in-out;
+    user-select: none;
+    cursor: default;
+    width: 7rem;
+    text-align: center;
+
+}
+.javaScript:hover{
+    background-color: rgb(255, 255, 0);
+    color:black;
+}
+
+
+.postgres{
+    background-color: white;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    font-weight: 600;
+    color: rgb(43, 156, 255);
+    padding:.4rem;
+    transition: all 0.4s ease-in-out;
+    /* border-bottom-right-radius: .4rem;
+    border-top-right-radius: .4rem; */
+    user-select: none;
+    cursor: default;
+    width: 7rem;
+}
+
+.postgres:hover{
+    background-color:rgb(43, 156, 255);
+    color:white
+}
+.container_whatsapp{
+    display: flex;
+    text-decoration: none;
+    margin-bottom: .6rem;
+}
+
+.container_whatsapp img{   
+    width: 1.2rem;
+    height: 1.2rem;
+    margin: .5rem .5rem 0 0;
+}
+
+.container_email{
+    display: flex;
+    text-decoration: none;
+    margin-bottom: .6rem;
+}
+.container_email img{
+    width: 1rem;
+    height: 1rem;
+    margin-top:.5rem;
+    margin-right: 0.5rem;
+}
+
+.container_rights{
+    display: grid;
+    justify-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 3rem;
+}
