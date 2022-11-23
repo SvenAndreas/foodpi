@@ -66,7 +66,11 @@ function Home() {
             <div className={s.cardContainer_recipeCard}>
               {
               !currentRecipes 
-              ? <h1>Loading..</h1>
+              ? (
+                <div className={s.loadingContainer}>
+                  <img src={food} alt="loading gif"/>
+                  <h3>Loading...</h3>
+                </div>)
               : typeof currentRecipes === "string" ? <p className={s.notFound}>Recipe not found</p> : currentRecipes.map(e=>{
                   return (
                       <RecipeCard key={e.id} id={e.id} diets={e.diets || e.Diets.map(e=>e.name)}  name={e.name} healthScore={e.healthScore} image={e.image}/>
