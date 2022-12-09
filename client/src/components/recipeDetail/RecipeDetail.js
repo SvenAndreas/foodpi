@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {useSelector,useDispatch} from "react-redux"
 import { Link, useParams} from 'react-router-dom'
-import { deleteRecipe, getDiets, getRecipeById, updateRecipe} from '../../redux/actions'
+import { cleanDetails, deleteRecipe, getDiets, getRecipeById, updateRecipe} from '../../redux/actions'
 import s from "./RecipeDetail.module.css"
 import food from "../../media/images/food.gif"
 import {validateUpdate} from "../../utils/validateUpdate.js"
@@ -21,6 +21,7 @@ function RecipeDetail(props) {
  useEffect(()=>{
  dispatch(getRecipeById(id))
  dispatch(getDiets())
+ return ()=>dispatch(cleanDetails())
 },[])
 
 

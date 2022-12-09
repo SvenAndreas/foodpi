@@ -38,3 +38,20 @@
 .paginateContainer button:active{
     scale: 0.90;
   }
+
+
+  @media screen and (max-width:450px){
+    .paginateContainer{
+        width: 412px;
+    }
+    .paginateContainer_div {
+        display: flex;
+        justify-content: center;
+        width: 350px;
+        flex-wrap: wrap ;
+        flex-grow: 1;
+        background-color: rgb(231, 230, 230);
+        border-radius: 1rem;
+        padding: 0.4rem;
+    }
+  }

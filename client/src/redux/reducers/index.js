@@ -1,4 +1,4 @@
-import { GET_DIETS, GET_RECIPES, FILTER_BY_DIET, FILTER_ALPHA, FILTER_BY_HEALTHSCORE,GET_RECIPE_BY_NAME,GET_RECIPES_BY_ID, SET_LOADING } from "../actions";
+import { GET_DIETS, GET_RECIPES, FILTER_BY_DIET, FILTER_ALPHA, FILTER_BY_HEALTHSCORE,GET_RECIPE_BY_NAME,GET_RECIPES_BY_ID, SET_LOADING,CLEAN_DETAILS } from "../actions";
 
 
 const initialState = {
@@ -87,6 +87,11 @@ function rootReducer (state = initialState, action) {
             return{
                 ...state,
                 loading: !state.loading
+            }
+        case CLEAN_DETAILS:
+            return{
+                ...state,
+                recipeDetails:{}
             }
         default:
             return{

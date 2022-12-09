@@ -6,6 +6,7 @@ export const FILTER_BY_HEALTHSCORE = "FILTER_BY_HEALTHSCORE"
 export const GET_RECIPES_BY_ID = "GET_RECIPES_BY_ID"
 export const GET_RECIPE_BY_NAME = "GET_RECIPE_BY_NAME"
 export const SET_LOADING = "SET_LOADING"
+export const CLEAN_DETAILS = "CLEAN"
 
 
 export const getRecipes = ()=>{
@@ -24,7 +25,7 @@ export const getDiets = ()=>{
     return async function (dispatch){
         const diets = await fetch("http://localhost:3001/diets")
         const data = await diets.json()
-        console.log(data)
+        // console.log(data)
         return dispatch({
             type:GET_DIETS,
             payload: data
@@ -63,6 +64,15 @@ export const orderHealthScore = (payload) => {
 
 }
 
+export const searchByQuery = (payload) =>{
+    return async function(dispatch){
+        return dispatch(
+           { type: 'QUERY',
+            payload}
+        )
+    }
+}
+
 export const getRecipeById = (payload)=>{
     // console.log(payload)
     return async function (dispatch){
@@ -73,6 +83,14 @@ export const getRecipeById = (payload)=>{
                 type: GET_RECIPES_BY_ID,
                 payload: data
             })
+    }
+}
+
+export const cleanDetails = ()=>{
+    return async function (dispatch){
+        return dispatch({
+            type: CLEAN_DETAILS
+        })
     }
 }
 

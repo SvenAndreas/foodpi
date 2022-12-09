@@ -40,3 +40,35 @@
     font-size: 1.5rem;
  
 }
+
+
+@media screen and (max-width:450px){
+    .container{
+        flex-wrap: wrap;
+    }
+    .paginateContainer{
+        margin: auto;
+    }
+    .cardContainer_recipeCard{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin: auto;
+        width: 300px;
+        overflow-x: scroll;
+        width: 40rem;
+    }
+    .loadingContainer{
+        margin-top: 20rem;
+        align-self: center;
+        text-align: center;
+        font-size: 1.5rem;
+     
+    }
+    .cardContainer {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+}

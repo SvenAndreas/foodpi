@@ -101,3 +101,38 @@
 .dataItem:hover{
     background-color: rgb(228, 227, 227);
 }
+
+@media screen and (max-width:450px){
+    .search_inputs_container input{
+        width: 20rem;
+        margin-left: 2rem;
+    }
+    .search_container{
+        align-self: center;
+        margin:auto;
+    }
+    .dataResults{
+        width: 14.5rem;
+        margin-left: 2rem;
+    }
+    .dataItem{
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+    .search_img_container_fs{
+        background-color: rgb(240, 235, 235);
+        position: absolute;
+        right: 10rem;
+        height: 4.2rem;
+        width: 4rem;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        border-radius: 100%;
+    }
+    .search_img_container_fs img{
+        height: 2.2rem;
+        width: 2.2rem;
+        border-radius: 100%;
+    }
+}

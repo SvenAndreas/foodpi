@@ -14,7 +14,7 @@ function Paginate({
   for (let i = 1; i <= Math.ceil(allRecipes / recipesPerPage); i++) {
     pageNumbers.push(i);
   }
-
+  
   return (  
     <div className={s.paginateContainer}>
       

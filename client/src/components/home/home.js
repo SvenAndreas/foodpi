@@ -35,6 +35,7 @@ function Home() {
     const goBackWards = ()=>{
       if (currentPage > 1)
       setCurrentPage(currentPage=> currentPage-1)
+
     }
 
 

@@ -106,3 +106,43 @@
    border:2px solid #c44569;
    width: 8rem;
 }
+
+
+@media screen and (max-width: 450px){
+    .navContainer{
+        width: 100%
+    }
+    .optionsContainer{
+        width: 412px;
+    }
+    .navContainer_options{
+        width: 412px;
+        flex-wrap: wrap 
+    }
+    .navContainer button{
+        width: 4rem
+    }
+    .navContainer_p{
+        width: 5rem;
+    }
+    .navContainer_options select{
+        width: 6rem;
+    }
+    .navContainer_searchBar_img img{
+        width: 5rem;
+    }
+    .navContainer_searchBar{
+        display: flex;
+        width: 412px;
+        margin-left: 0;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+    .navContainer_create_button{
+        width: 10rem;
+    }
+    .navContainer_link{
+        margin-left: .5rem;
+        margin-right: .5rem;
+    }
+}
